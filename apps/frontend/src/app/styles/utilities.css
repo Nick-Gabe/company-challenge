@@ -1,0 +1,5 @@
+@layer utilities {
+  .no-select-arrow {
+    @apply bg-none p-0;
+  }
+}
