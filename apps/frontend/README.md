@@ -1,27 +1,37 @@
-# React + TypeScript + Vite
+# ConfigFrontend
+_React + Typescript + Vite_
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+- The frontend is made using React with Typescript, along with Tailwind for styling.
+- It also has Eslint and Prettier for greater code quality and maintaining standards.
 
-Currently, two official plugins are available:
+It is structured using two architectures: [FSD](https://feature-sliced.design/) _(Feature Sliced Design)_ and [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) _(Model-view-controller)_.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I decided to use both because taking into account the context of the product, many features could be added to help the user create their execution logic. Besides, MVC is perfect for better visualizing and separating the logic of manipulating data from the user interface.
 
-## Expanding the ESLint configuration
+## Commands
+_Ideally you should run commands in the root of the project_
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+### Run development
 ```
+pnpm dev
+```
+It will try to start the frontend application in [localhost:5173](http://localhost:5173).
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Build
+```
+pnpm build
+```
+It will compile typescript and then generate a production build for React placed in the folder `dist`.
+
+### Preview
+```
+pnpm preview
+```
+It starts running the production build that was generated.
+
+### Linting
+```
+pnpm lint
+```
+It will check through the code to find inconsistencies, if you use `--fix` along with the command it will try to automatically solve some errors.

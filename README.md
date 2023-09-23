@@ -1,34 +1,29 @@
-# `Turborepo` Vite starter
+# Challenge Monorepo
+This is a monorepo created using `Turbo`, to make an easier connection between all the apps contained by the entire application.
 
-This is an official starter Turborepo.
+Here you can find the documentation about the monorepo as a whole, but if you want a more in-depth explanation of each app and how they're made, you can check their inner README's:
 
-## Using this example
+## Apps
+- [README](./apps/frontend/README.md) | `frontend`: react-typescript app
 
-Run the following command:
-
-```sh
-npx create-turbo@latest -e with-vite
-```
-
-## What's inside?
-
-This Turborepo includes the following packages and apps:
-
-### Apps and Packages
-
-- `docs`: a vanilla [vite](https://vitejs.dev) ts app
-- `web`: another vanilla [vite](https://vitejs.dev) ts app
-- `ui`: a stub component & utility library shared by both `web` and `docs` applications
+## Packages
 - `eslint-config-custom`: shared `eslint` configurations
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
 
-Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
+## How to run
+The repo uses `pnpm` as the package manager, so if you don't have it you can install it using the following:
+```
+npm install -g pnpm@8.6.10
+```
+Now you can install the repository dependencies _(for apps and packages)_ by running:
+```
+pnpm install
+```
+After installing the dependencies you can use any of the following commands:
+- `dev` - Runs development
+- `build` - Generates a production build
+- `lint` - Lints the project
 
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Jest](https://jestjs.io) test runner for all things JavaScript
-- [Prettier](https://prettier.io) for code formatting
+By default it will run for all apps simultaneously, but if you want to run only a specific app you should use:
+```
+pnpm dev --scope=<app-name>
+```
