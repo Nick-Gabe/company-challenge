@@ -9,7 +9,8 @@
   "devDependencies": {
     "eslint": "^8.49.0",
     "eslint-config-custom": "workspace:*",
-    "turbo": "latest"
+    "turbo": "latest",
+    "typescript": "^5.2.2"
   },
   "packageManager": "pnpm@8.6.10"
 }
