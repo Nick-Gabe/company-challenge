@@ -1,4 +1,5 @@
-import { forwardRef, useImperativeHandle } from "react";
+import { ThemeContext } from "contexts";
+import { forwardRef, useContext, useImperativeHandle } from "react";
 import ReactFlow, {
   Background,
   Controls,
@@ -7,6 +8,7 @@ import ReactFlow, {
 } from "reactflow";
 
 import "reactflow/dist/style.css";
+
 import { useDiagramModel } from "../model";
 import { nodeTypes } from "./CustomNodes";
 
@@ -22,6 +24,7 @@ export const DiagramBoard = forwardRef<
   DiagramBoardProps
 >((flowProps, ref) => {
   const [diagramState, diagramModel] = useDiagramModel();
+  const { theme } = useContext(ThemeContext);
 
   useImperativeHandle(ref, () => ({
     createNode: diagramModel.createNode,
@@ -40,7 +43,9 @@ export const DiagramBoard = forwardRef<
         fitView
         {...flowProps}
       >
-        <Background className="bg-white" />
+        <Background
+          className={theme.name === "light" ? "bg-white" : "bg-gray-800"}
+        />
         <Controls />
         <MiniMap />
       </ReactFlow>

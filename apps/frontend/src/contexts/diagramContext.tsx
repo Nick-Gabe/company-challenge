@@ -14,7 +14,7 @@ import {
   useNodesState,
 } from "reactflow";
 
-type DiagramContextState = {
+type DiagramContext = {
   nodes: Node[];
   edges: Edge[];
   setNodes: Dispatch<SetStateAction<Node[]>>;
@@ -24,7 +24,7 @@ type DiagramContextState = {
   updateNodeData: (id: string, data: Record<string, unknown>) => void;
 };
 
-export const DiagramContext = createContext({} as DiagramContextState);
+export const DiagramContext = createContext({} as DiagramContext);
 
 type DiagramContextProviderProps = {
   initialNodes: Node[];
