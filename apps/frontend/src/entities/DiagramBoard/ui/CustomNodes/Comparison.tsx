@@ -47,7 +47,7 @@ const ComparisonNode: FC<NodeProps> = ({ isConnectable }) => {
         position={Position.Top}
         isConnectable={isConnectable}
       />
-      <p>IF</p>
+      <p>IS</p>
       <div className="flex mt-1 mb-2 gap-1">
         <select className="select select-bordered bg-white select-xs">
           {comparisonOptions.map((x) => (
@@ -68,7 +68,7 @@ const ComparisonNode: FC<NodeProps> = ({ isConnectable }) => {
           placeholder="value"
         />
       </div>
-      <div className="w-full h-full absolute overflow-hidden top-0 left-0 pointer-events-none">
+      <div className="w-full h-full absolute overflow-hidden top-0 left-0 pointer-events-none handle-indicators">
         <div className="w-5 h-5 rounded-full border-black border-solid border-1 bg-green-300 absolute left-10 -translate-x-1/3 -bottom-2" />
         <div className="w-5 h-5 rounded-full border-black border-solid border-1 bg-red-300 absolute right-10 translate-x-1/3 -bottom-2" />
       </div>
