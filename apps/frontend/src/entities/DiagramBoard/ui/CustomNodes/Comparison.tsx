@@ -1,44 +1,18 @@
 import { FC } from "react";
 import { Handle, NodeProps, Position } from "reactflow";
 
-// mocked for now
-const comparisonOptions = [
-  {
-    label: "age",
-    value: "age",
-    type: "number",
-  },
-  {
-    label: "salary",
-    value: "salary",
-    type: "salary",
-  },
-];
+const comparisonSymbols = ["=", "<", "<=", ">=", ">"] as const;
 
-const comparer = [
-  {
-    label: "=",
-    value: "=",
-  },
-  {
-    label: "<",
-    value: "<",
-  },
-  {
-    label: "<=",
-    value: "<=",
-  },
-  {
-    label: ">=",
-    value: ">=",
-  },
-  {
-    label: ">",
-    value: ">",
-  },
-];
+type ComparisonNodeData = {
+  parameter?: string;
+  operation?: (typeof comparisonSymbols)[number];
+  value?: string;
+};
 
-const ComparisonNode: FC<NodeProps> = ({ isConnectable }) => {
+const ComparisonNode: FC<NodeProps<ComparisonNodeData>> = ({
+  isConnectable,
+  data,
+}) => {
   return (
     <div className="react-flow__node-default w-auto bg-blue-300 overflow-hidden">
       <Handle
@@ -47,25 +21,27 @@ const ComparisonNode: FC<NodeProps> = ({ isConnectable }) => {
         position={Position.Top}
         isConnectable={isConnectable}
       />
-      <p>IS</p>
+      <p>COMPARISON</p>
       <div className="flex mt-1 mb-2 gap-1">
-        <select className="select select-bordered bg-white select-xs">
-          {comparisonOptions.map((x) => (
-            <option key={x.value} value={x.value}>
-              {x.label}
-            </option>
-          ))}
-        </select>
-        <select className="select text-white select-xs no-select-arrow text-center w-6">
-          {comparer.map((x) => (
-            <option key={x.value} value={x.value}>
-              {x.label}
+        <input
+          className="input input-bordered input-xs bg-white w-[76px]"
+          placeholder="parameter"
+          value={data.parameter}
+        />
+        <select
+          className="select text-white select-xs no-select-arrow text-center w-6"
+          defaultValue={data.operation}
+        >
+          {comparisonSymbols.map((symbol) => (
+            <option key={symbol} value={symbol}>
+              {symbol}
             </option>
           ))}
         </select>
         <input
           className="input input-bordered input-xs bg-white w-[76px]"
           placeholder="value"
+          value={data.value}
         />
       </div>
       <div className="w-full h-full absolute overflow-hidden top-0 left-0 pointer-events-none handle-indicators">

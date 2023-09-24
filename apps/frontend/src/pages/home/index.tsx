@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { withReactFlow } from "app/providers/reactflow";
 import { DiagramMaker } from "widgets";
 

@@ -20,7 +20,7 @@ export type useDiagramBoardParams = {
 export const useDiagramModel = (params: useDiagramBoardParams) => {
   const [nodes, setNodes, onNodesChange] = useNodesState(params.initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(params.initialEdges);
-  const { project, getNode } = useReactFlow();
+  const { project, getNode, toObject } = useReactFlow();
   const [customNodesState, customNodeModel] = useCustomNode();
 
   const getId = useCallback(
@@ -30,16 +30,14 @@ export const useDiagramModel = (params: useDiagramBoardParams) => {
 
   const onConnect = useCallback(
     (params: Edge | Connection) => {
-      const isStart = params.sourceHandle === "start";
       const alreadyConnected = edges.some(
-        (edge) =>
-          edge.target === params.target && edge.source === params.source,
+        (edge) => edge.target === params.target,
       );
-      const startAlreadyConnects = edges.some(
+      const alreadyConnects = edges.some(
         (edge) => edge.source === params.sourceHandle,
       );
 
-      if (alreadyConnected || (isStart && startAlreadyConnects)) {
+      if (alreadyConnected || alreadyConnects) {
         return;
       }
 
@@ -48,7 +46,6 @@ export const useDiagramModel = (params: useDiagramBoardParams) => {
       const node = getNode(params.source);
 
       if (node?.type && params.sourceHandle) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const handleInfo = customNodeModel.getHandleInfo(node?.type);
         const label = handleInfo.labels?.[params.sourceHandle];
 
@@ -79,6 +76,8 @@ export const useDiagramModel = (params: useDiagramBoardParams) => {
         type as keyof (typeof customNodesState)["info"]
       ].size || [0, 0];
 
+      const initialData = customNodeModel.getInitialData(type);
+
       const newNode = {
         id,
         position: project({
@@ -86,7 +85,7 @@ export const useDiagramModel = (params: useDiagramBoardParams) => {
           y: event.clientY - top - height / 2,
         }),
         type,
-        data: {},
+        data: initialData,
       };
 
       setNodes((nds) => nds.concat([newNode]));
@@ -104,6 +103,7 @@ export const useDiagramModel = (params: useDiagramBoardParams) => {
     onEdgesChange,
     onConnect,
     createNode,
+    export: toObject,
   };
 
   return [state, model] as const;
