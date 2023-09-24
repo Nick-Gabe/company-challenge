@@ -1,32 +1,19 @@
-import { RefObject, useCallback, MouseEvent } from "react";
-import {
-  Connection,
-  Edge,
-  Node,
-  addEdge,
-  useEdgesState,
-  useNodesState,
-  useReactFlow,
-} from "reactflow";
+import { DiagramContext } from "contexts/diagramContext";
+import { useCallback, MouseEvent, useContext } from "react";
+import { Connection, Edge, addEdge, useReactFlow } from "reactflow";
 
 import { useCustomNode } from ".";
 
-export type useDiagramBoardParams = {
-  initialNodes: Node[];
-  initialEdges: Edge[];
-  reactFlowWrapper: RefObject<HTMLElement>;
-};
-
-export const useDiagramModel = (params: useDiagramBoardParams) => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(params.initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(params.initialEdges);
+export const useDiagramModel = () => {
+  const { nodes, setNodes, onNodesChange, edges, setEdges, onEdgesChange } =
+    useContext(DiagramContext);
   const { project, getNode, toObject } = useReactFlow();
-  const [customNodesState, customNodeModel] = useCustomNode();
+  const [, customNodeModel] = useCustomNode();
 
-  const getId = useCallback(
-    () => `${(Number(nodes.at(-1)?.id) || 0) + 1}`,
-    [nodes],
-  );
+  const getId = useCallback(() => {
+    const lastId = Number(nodes.at(-1)?.id);
+    return String((lastId || 0) + 1);
+  }, [nodes]);
 
   const onConnect = useCallback(
     (params: Edge | Connection) => {
@@ -37,11 +24,9 @@ export const useDiagramModel = (params: useDiagramBoardParams) => {
         (edge) => edge.source === params.sourceHandle,
       );
 
-      if (alreadyConnected || alreadyConnects) {
+      if (alreadyConnected || alreadyConnects || !params.source) {
         return;
       }
-
-      if (!params.source) return;
 
       const node = getNode(params.source);
 
@@ -66,23 +51,16 @@ export const useDiagramModel = (params: useDiagramBoardParams) => {
 
   const createNode = useCallback(
     (event: MouseEvent, type: string) => {
-      if (!params.reactFlowWrapper.current) return;
-
-      const { top, left } =
-        params.reactFlowWrapper.current.getBoundingClientRect();
       const id = getId();
 
-      const [width, height] = customNodesState.info[
-        type as keyof (typeof customNodesState)["info"]
-      ].size || [0, 0];
-
+      const [width, height] = customNodeModel.getSize(type) || [0, 0];
       const initialData = customNodeModel.getInitialData(type);
 
       const newNode = {
         id,
         position: project({
-          x: event.clientX - left - width / 2,
-          y: event.clientY - top - height / 2,
+          x: event.clientX - width / 2,
+          y: event.clientY - height / 2,
         }),
         type,
         data: initialData,

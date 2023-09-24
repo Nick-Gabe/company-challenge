@@ -1,8 +1,6 @@
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, useImperativeHandle } from "react";
 import ReactFlow, {
-  Node,
   Background,
-  Edge,
   Controls,
   ReactFlowProps,
   MiniMap,
@@ -12,32 +10,26 @@ import "reactflow/dist/style.css";
 import { useDiagramModel } from "../model";
 import { nodeTypes } from "./CustomNodes";
 
-type DiagramBoardProps = {
-  initialNodes: Node[];
-  initialEdges: Edge[];
-} & ReactFlowProps;
+type DiagramBoardProps = ReactFlowProps;
 
 export type DiagramImperativeHandle = {
   createNode: ReturnType<typeof useDiagramModel>[1]["createNode"];
+  export: ReturnType<typeof useDiagramModel>[1]["export"];
 };
 
 export const DiagramBoard = forwardRef<
   DiagramImperativeHandle,
   DiagramBoardProps
->(({ initialNodes, initialEdges, ...flowProps }, ref) => {
-  const reactFlowWrapper = useRef<HTMLDivElement>(null);
-  const [diagramState, diagramModel] = useDiagramModel({
-    initialNodes,
-    initialEdges,
-    reactFlowWrapper,
-  });
+>((flowProps, ref) => {
+  const [diagramState, diagramModel] = useDiagramModel();
 
   useImperativeHandle(ref, () => ({
     createNode: diagramModel.createNode,
+    export: diagramModel.export,
   }));
 
   return (
-    <div className="w-full h-full" ref={reactFlowWrapper}>
+    <div className="w-full h-full">
       <ReactFlow
         nodes={diagramState.nodes}
         edges={diagramState.edges}

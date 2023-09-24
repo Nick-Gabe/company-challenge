@@ -1,4 +1,5 @@
-import { DiagramBoard, DiagramImperativeHandle } from "entities";
+import { DiagramContextProvider } from "contexts/diagramContext";
+import { DiagramBoard, DiagramImperativeHandle, Header } from "entities";
 import { AddNodeButton } from "features";
 import { useRef } from "react";
 import { Node } from "reactflow";
@@ -14,14 +15,12 @@ const initialNodes: Node[] = [
   {
     id: "2",
     type: "comparison",
-    data: {},
+    data: {
+      parameter: "",
+      operation: "=",
+      value: "",
+    },
     position: { x: 100, y: 100 },
-  },
-  {
-    id: "3",
-    type: "comparison",
-    data: {},
-    position: { x: 140, y: 200 },
   },
 ];
 
@@ -38,13 +37,13 @@ export const DiagramMaker = () => {
   const diagramRef = useRef<DiagramImperativeHandle>(null);
 
   return (
-    <>
-      <DiagramBoard
-        ref={diagramRef}
-        initialNodes={initialNodes}
-        initialEdges={initialEdges}
-      />
+    <DiagramContextProvider
+      initialEdges={initialEdges}
+      initialNodes={initialNodes}
+    >
+      <Header diagramRef={diagramRef} />
+      <DiagramBoard ref={diagramRef} />
       <AddNodeButton diagramRef={diagramRef} />
-    </>
+    </DiagramContextProvider>
   );
 };

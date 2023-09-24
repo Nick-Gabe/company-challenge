@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { DiagramContext } from "contexts/diagramContext";
+import { FC, useContext } from "react";
 import { Handle, NodeProps, Position } from "reactflow";
 
 const decisionOptions = [
@@ -19,7 +20,10 @@ type DecisionNodeData = {
 const DecisionNode: FC<NodeProps<DecisionNodeData>> = ({
   isConnectable,
   data,
+  id,
 }) => {
+  const { updateNodeData } = useContext(DiagramContext);
+
   return (
     <div className="react-flow__node-default bg-gray-300">
       <Handle
@@ -32,6 +36,7 @@ const DecisionNode: FC<NodeProps<DecisionNodeData>> = ({
       <select
         className="mt-1 select select-bordered bg-white select-xs"
         defaultValue={String(data.decision)}
+        onChange={(e) => updateNodeData(id, { decision: e.target.value })}
       >
         {decisionOptions.map((decision) => (
           <option key={decision.label} value={String(decision.value)}>

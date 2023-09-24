@@ -49,6 +49,10 @@ export const useCustomNode = () => {
     return customNodes[type as keyof typeof customNodes]?.handles;
   };
 
+  const getSize = (type: string) => {
+    return customNodes[type as keyof typeof customNodes]?.size;
+  };
+
   const getInitialData = (type: string) => {
     return customNodes[type as keyof typeof customNodes]?.initialData;
   };
@@ -58,6 +62,7 @@ export const useCustomNode = () => {
   const model = {
     getHandleInfo,
     getInitialData,
+    getSize,
   };
 
   return [state, model] as const;

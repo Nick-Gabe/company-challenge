@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { DiagramContext } from "contexts/diagramContext";
+import { FC, useContext } from "react";
 import { Handle, NodeProps, Position } from "reactflow";
 
 const comparisonSymbols = ["=", "<", "<=", ">=", ">"] as const;
@@ -12,7 +13,10 @@ type ComparisonNodeData = {
 const ComparisonNode: FC<NodeProps<ComparisonNodeData>> = ({
   isConnectable,
   data,
+  id,
 }) => {
+  const { updateNodeData } = useContext(DiagramContext);
+
   return (
     <div className="react-flow__node-default w-auto bg-blue-300 overflow-hidden">
       <Handle
@@ -27,10 +31,12 @@ const ComparisonNode: FC<NodeProps<ComparisonNodeData>> = ({
           className="input input-bordered input-xs bg-white w-[76px]"
           placeholder="parameter"
           value={data.parameter}
+          onChange={(e) => updateNodeData(id, { parameter: e.target.value })}
         />
         <select
           className="select text-white select-xs no-select-arrow text-center w-6"
           defaultValue={data.operation}
+          onChange={(e) => updateNodeData(id, { operation: e.target.value })}
         >
           {comparisonSymbols.map((symbol) => (
             <option key={symbol} value={symbol}>
@@ -40,8 +46,10 @@ const ComparisonNode: FC<NodeProps<ComparisonNodeData>> = ({
         </select>
         <input
           className="input input-bordered input-xs bg-white w-[76px]"
+          type={data.operation === "=" ? "text" : "number"}
           placeholder="value"
           value={data.value}
+          onChange={(e) => updateNodeData(id, { value: e.target.value })}
         />
       </div>
       <div className="w-full h-full absolute overflow-hidden top-0 left-0 pointer-events-none handle-indicators">
