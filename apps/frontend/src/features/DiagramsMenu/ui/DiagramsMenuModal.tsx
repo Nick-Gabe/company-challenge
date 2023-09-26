@@ -25,34 +25,55 @@ export const DiagramsMenuModal: FC<DiagramsMenuModalProps> = ({
             </tr>
           </thead>
           <tbody>
-            {diagramsState.diagrams.map((diagram, index) => (
-              <tr className="border-bottom-1 border-slate-700" key={diagram.id}>
-                <td className="py-0">{index + 1}</td>
-                <td className="py-0">
-                  <p className="max-w-[120px] sm:max-w-[200px] text-ellipsis overflow-hidden whitespace-nowrap">
-                    {diagram.title}
-                  </p>
-                </td>
-                <td className="py-0">
-                  {new Date(
-                    diagram.updated_at || diagram.created_at,
-                  ).toLocaleString()}
-                </td>
-                <td className="flex justify-center gap-2 py-0">
-                  <button className="btn btn-ghost">Edit</button>
-                  <button
-                    className="btn btn-ghost w-10 h-10 p-2"
-                    onClick={() => diagramModel.deleteDiagram(diagram.id)}
-                  >
-                    <img
-                      className="w-full h-full"
-                      src="assets/trash.svg"
-                      alt="Trash"
-                    />
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {diagramsState.diagrams?.map((diagram, index) => {
+              const isDeleting = diagramsState.deleteClickedItems.includes(
+                diagram.id,
+              );
+
+              return (
+                <tr
+                  className="border-bottom-1 border-slate-700"
+                  key={diagram.id}
+                >
+                  <td className="py-0">{index + 1}</td>
+                  <td className="py-0">
+                    <p className="max-w-[120px] sm:max-w-[200px] text-ellipsis overflow-hidden whitespace-nowrap">
+                      {diagram.title}
+                    </p>
+                  </td>
+                  <td className="py-0">
+                    {new Date(
+                      diagram.updated_at || diagram.created_at,
+                    ).toLocaleString()}
+                  </td>
+                  <td className="flex justify-center gap-2 pt-0 pb-1">
+                    <button className="btn btn-ghost">Edit</button>
+                    <button
+                      className={`btn ${
+                        isDeleting ? "btn-error" : "btn-ghost"
+                      } w-10 h-10 p-2 relative`}
+                      onClick={() => diagramModel.clickDelete(diagram.id)}
+                    >
+                      {isDeleting ? (
+                        <div
+                          className={
+                            "tooltip tooltip-open tooltip-error absolute w-full h-full lowercase font-normal"
+                          }
+                          data-tip="Click again"
+                        />
+                      ) : null}
+                      <img
+                        className={`w-full h-full ${
+                          isDeleting ? "grayscale brightness-200" : ""
+                        }`}
+                        src="assets/trash.svg"
+                        alt="Trash"
+                      />
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

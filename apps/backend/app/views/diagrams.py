@@ -38,7 +38,6 @@ def update_diagram(id):
 @diagrams_bp.route('/<string:id>', methods=['DELETE'])
 def delete_diagram(id):
     deleted = app.db.delete_diagram(id=id)
-    print(deleted)
     if deleted == True:
         return '', 204
     return '', 404
