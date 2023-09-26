@@ -16,14 +16,14 @@ export const Header: FC<HeaderProps> = ({ diagramRef }) => {
         isDark ? "bg-slate-800 text-white" : "bg-gray-300 text-black"
       } grid grid-cols-1 sm:grid-cols-3 w-full align-middle px-6 gap-4`}
     >
-      <div className="flex gap-2 columns-1 justify-center sm:justify-start">
+      <div className="flex gap-2 justify-center sm:justify-start">
         <img className="h-10" src="logo.svg" alt="Logo of a diagram" />
         <h1>Diagram Decision Maker</h1>
       </div>
-      <div className="flex justify-center text-center sm:row-auto sm:col-auto">
+      <div className="flex justify-center text-center row-start-3 sm:row-auto">
         <p>Untitled</p>
       </div>
-      <div className="flex gap-2 justify-center sm:justify-end row-span-1 col-span-1">
+      <div className="flex gap-2 justify-center sm:justify-end">
         <button
           className={`btn ${isDark ? "bg-gray-500" : "bg-gray-400"} p-1`}
           onClick={switchTheme}
