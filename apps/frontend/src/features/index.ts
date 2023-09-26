@@ -1,2 +1,2 @@
 export * from "./AddNodeButton";
-export * from "./DiagramsMenu";
+export * from "./PoliciesMenu";

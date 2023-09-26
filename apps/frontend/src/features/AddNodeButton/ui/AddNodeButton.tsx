@@ -1,4 +1,4 @@
-import { DiagramImperativeHandle } from "entities";
+import { PolicyImperativeHandle } from "entities";
 import { FC, RefObject } from "react";
 
 import { useAddNodeButtonModel } from "../model";
@@ -26,10 +26,10 @@ const subButtons: Pick<
 ];
 
 type AddNodeButtonProps = {
-  diagramRef: RefObject<DiagramImperativeHandle>;
+  policyRef: RefObject<PolicyImperativeHandle>;
 };
 
-export const AddNodeButton: FC<AddNodeButtonProps> = ({ diagramRef }) => {
+export const AddNodeButton: FC<AddNodeButtonProps> = ({ policyRef }) => {
   const [addNodeButtonState, addNodeButtonModel] = useAddNodeButtonModel();
 
   return (
@@ -57,7 +57,7 @@ export const AddNodeButton: FC<AddNodeButtonProps> = ({ diagramRef }) => {
             addNodeButtonModel.toggleMenu;
           }}
           onMouseUp={(e) => {
-            diagramRef.current?.createNode(e, btn.nodeName);
+            policyRef.current?.createNode(e, btn.nodeName);
           }}
         />
       ))}

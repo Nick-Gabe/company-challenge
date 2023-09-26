@@ -1,28 +1,28 @@
 from flask import Flask
 from .models import Session, Base, engine
-from .models.diagram import Diagram, Edge, Node, Viewport
+from .models.policy import Policy, Edge, Node, Viewport
 
 session = Session()
 
 
 class Database:
-    def read_diagrams(self):
-        return session.query(Diagram).all()
+    def read_policies(self):
+        return session.query(Policy).all()
 
-    def read_diagram(self, id: str):
-        return session.query(Diagram).get(id)
+    def read_policy(self, id: str):
+        return session.query(Policy).get(id)
 
-    def create_diagram(self, title: str, edges: list[Edge], nodes: list[Node], viewport: Viewport):
-        new_diagram = Diagram(
+    def create_policy(self, title: str, edges: list[Edge], nodes: list[Node], viewport: Viewport):
+        new_policy = Policy(
             title=title, edges=edges, nodes=nodes, viewport=viewport
         )
-        session.add(new_diagram)
+        session.add(new_policy)
         session.commit()
 
-        return self.read_diagram(id=new_diagram.id)
+        return self.read_policy(id=new_policy.id)
 
-    def update_diagram(self, id: str, title: str, edges: list[Edge], nodes: list[Node], viewport: Viewport):
-        session.query(Diagram).filter_by(id=id).update({
+    def update_policy(self, id: str, title: str, edges: list[Edge], nodes: list[Node], viewport: Viewport):
+        session.query(Policy).filter_by(id=id).update({
             'title': title,
             'edges': edges,
             'nodes': nodes,
@@ -30,19 +30,19 @@ class Database:
         }, synchronize_session='fetch')
         session.commit()
 
-        return self.read_diagram(id=id)
+        return self.read_policy(id=id)
 
-    def delete_diagram(self, id: str):
-        diagram = session.query(Diagram).filter_by(id=id)
-        if diagram.first() == None:
+    def delete_policy(self, id: str):
+        policy = session.query(Policy).filter_by(id=id)
+        if policy.first() == None:
             return None
 
-        diagram.delete()
+        policy.delete()
         session.commit()
-        return not self.diagram_exists(id=id)
+        return not self.policy_exists(id=id)
 
-    def diagram_exists(self, id: str):
-        return session.query(Diagram).get(id) != None
+    def policy_exists(self, id: str):
+        return session.query(Policy).get(id) != None
 
     def close_connection(self, execution=None):
         session.close()

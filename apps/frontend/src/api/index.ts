@@ -1,1 +1,1 @@
-export * from "./diagrams";
+export * from "./policies";

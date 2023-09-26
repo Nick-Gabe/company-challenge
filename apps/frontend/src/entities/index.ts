@@ -1,2 +1,2 @@
-export * from "./DiagramBoard";
+export * from "./PolicyBoard";
 export * from "./Header";

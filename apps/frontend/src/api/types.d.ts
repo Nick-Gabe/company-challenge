@@ -1,8 +1,8 @@
-type Diagram = {
+type Policy = {
   id: number;
   title: string;
   edges: Edge[];
-  nodes: DiagramNode[];
+  nodes: PolicyNode[];
   viewport: Viewport;
   created_at: string;
   updated_at: string;
@@ -18,7 +18,7 @@ type Edge = {
   targetHandle: string;
 };
 
-type DiagramNode = {
+type PolicyNode = {
   id: string;
   data: string;
   height: number;

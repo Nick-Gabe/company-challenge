@@ -1,1 +1,1 @@
-export * from "./DiagramMaker";
+export * from "./PolicyMaker";

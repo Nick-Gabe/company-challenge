@@ -1,6 +1,6 @@
 from flask import Flask
 from .config import Config
-from .views.diagrams import diagrams_bp
+from .views.policies import policies_bp
 from .database import Database, create_database_tables
 
 
@@ -13,6 +13,6 @@ def create_app():
         app.db = Database()
 
     app.config.from_object(Config)
-    app.register_blueprint(diagrams_bp)
+    app.register_blueprint(policies_bp)
 
     return app

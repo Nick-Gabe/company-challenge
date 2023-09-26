@@ -10,15 +10,13 @@ The project is pretty simple, it is separated into 2 folders, models are the dat
 The routes are:
 | type | route | description |
 |---|---|---|
-|GET|`/diagrams/`|Retrieves all diagrams|
-|POST|`/diagrams/`|Creates a new diagram|
-|PUT|`/diagrams/<string:id>`|Replaces a diagram|
-|GET|`/diagrams/<string:id>`|Retrieves a single diagram|
-|DELETE|`/diagrams/<string:id>`|Deletes a diagram|
+|GET|`/policies/`|Retrieves all policies|
+|POST|`/policies/`|Creates a new policy|
+|PUT|`/policies/<string:id>`|Replaces a policy|
+|GET|`/policies/<string:id>`|Retrieves a single policy|
+|DELETE|`/policies/<string:id>`|Deletes a policy|
 
-These routes mention Diagrams which is what the FrontEnd sees. The diagrams data is only used to visually see the policies and change them.
-
-The database is currently stored in a file called `diagrams.db` to make it easier to debug and also to run the project without additional settings.
+The database is currently stored in a file called `policies.db` to make it easier to debug and also to run the project without additional settings.
 
 ### How to run
 In order to run the Backend you need Python on your system and then download the project dependencies:

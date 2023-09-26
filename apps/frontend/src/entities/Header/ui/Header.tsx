@@ -1,16 +1,16 @@
-import { DiagramContext, ThemeContext } from "contexts";
-import { DiagramImperativeHandle } from "entities";
-import { DiagramsMenu } from "features";
-import { SaveDiagram } from "features/SaveDiagram";
+import { PolicyContext, ThemeContext } from "contexts";
+import { PolicyImperativeHandle } from "entities";
+import { PoliciesMenu } from "features";
+import { SavePolicy } from "features/SavePolicy";
 import { FC, RefObject, useContext } from "react";
 
 type HeaderProps = {
-  diagramRef: RefObject<DiagramImperativeHandle>;
+  policyRef: RefObject<PolicyImperativeHandle>;
 };
 
-export const Header: FC<HeaderProps> = ({ diagramRef }) => {
+export const Header: FC<HeaderProps> = ({ policyRef }) => {
   const { theme, switchTheme, isDark } = useContext(ThemeContext);
-  const { title } = useContext(DiagramContext);
+  const { title } = useContext(PolicyContext);
 
   return (
     <div
@@ -19,8 +19,8 @@ export const Header: FC<HeaderProps> = ({ diagramRef }) => {
       } grid grid-cols-1 sm:grid-cols-3 w-full align-middle px-6 gap-4`}
     >
       <div className="flex gap-2 justify-center sm:justify-start">
-        <img className="h-10" src="logo.svg" alt="Logo of a diagram" />
-        <h1>Diagram Decision Maker</h1>
+        <img className="h-10" src="logo.svg" alt="Logo of a policy" />
+        <h1>Policy Decision Maker</h1>
       </div>
       <div className="flex justify-center text-center row-start-3 sm:row-auto">
         <p>{title}</p>
@@ -32,8 +32,8 @@ export const Header: FC<HeaderProps> = ({ diagramRef }) => {
         >
           <img className="w-full h-full" src={theme.icon} />
         </button>
-        <DiagramsMenu />
-        <SaveDiagram diagramRef={diagramRef} />
+        <PoliciesMenu />
+        <SavePolicy policyRef={policyRef} />
       </div>
     </div>
   );

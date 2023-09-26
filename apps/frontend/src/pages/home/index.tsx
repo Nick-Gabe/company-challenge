@@ -1,11 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
 import { withReactFlow } from "app/providers/reactflow";
-import { DiagramMaker } from "widgets";
+import { PolicyMaker } from "widgets";
 
 const HomePage = () => {
   return (
     <div className="w-screen h-screen">
-      <DiagramMaker />
+      <PolicyMaker />
     </div>
   );
 };
