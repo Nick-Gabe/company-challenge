@@ -48,7 +48,6 @@ class Node:
     deletable: bool
     selected: bool
     dragging: bool
-    diagram_id: int
 
 
 class Viewport:

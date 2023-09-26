@@ -23,6 +23,7 @@
     "compose-function": "^3.0.3",
     "daisyui": "^3.7.7",
     "eslint-config-custom": "workspace:*",
+    "ky": "^1.0.1",
     "postcss": "^8.4.30",
     "postcss-import": "^15.1.0",
     "reactflow": "^11.8.3",
