@@ -16,6 +16,7 @@ type Themes = keyof typeof themes;
 type ThemeContext = {
   theme: (typeof themes)["dark"];
   switchTheme: () => void;
+  isDark: boolean;
 };
 
 export const ThemeContext = createContext({} as ThemeContext);
@@ -31,8 +32,10 @@ export const ThemeContextProvider: FC<PropsWithChildren> = ({ children }) => {
     setTheme(themes[newTheme]);
   };
 
+  const isDark = theme.name === "dark";
+
   return (
-    <ThemeContext.Provider value={{ theme, switchTheme }}>
+    <ThemeContext.Provider value={{ theme, switchTheme, isDark }}>
       {children}
     </ThemeContext.Provider>
   );

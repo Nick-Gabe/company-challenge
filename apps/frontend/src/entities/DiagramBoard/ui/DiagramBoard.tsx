@@ -24,7 +24,7 @@ export const DiagramBoard = forwardRef<
   DiagramBoardProps
 >((flowProps, ref) => {
   const [diagramState, diagramModel] = useDiagramModel();
-  const { theme } = useContext(ThemeContext);
+  const { isDark } = useContext(ThemeContext);
 
   useImperativeHandle(ref, () => ({
     createNode: diagramModel.createNode,
@@ -43,9 +43,7 @@ export const DiagramBoard = forwardRef<
         fitView
         {...flowProps}
       >
-        <Background
-          className={theme.name === "light" ? "bg-white" : "bg-gray-800"}
-        />
+        <Background className={isDark ? "bg-gray-800" : "bg-white"} />
         <Controls />
         <MiniMap />
       </ReactFlow>
