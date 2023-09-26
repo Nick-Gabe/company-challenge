@@ -1,33 +1,23 @@
-import { Options } from "ky";
-
-import api from "./instance";
-
-const generateApiFunction = async <T>(
-  method: "get" | "post" | "patch" | "put" | "delete",
-  route: string,
-  options?: Options,
-): ApiReturn<T> => {
-  const response = await api[method](route, options);
-  const data = await response.json<T>();
-  return [data, response.ok];
-};
+import { generateApiFunction } from "./instance";
 
 export const getAllDiagrams = async (): ApiReturn<Diagram[]> =>
-  generateApiFunction<Diagram[]>("get", "/");
+  generateApiFunction<Diagram[]>("get", "diagrams/");
 
 export const getDiagram = async (id: number): ApiReturn<Diagram> =>
-  generateApiFunction<Diagram>("get", `/${id}`);
+  generateApiFunction<Diagram>("get", `diagrams/${id}/`);
 
 export const createDiagram = async (
   payload: Omit<Diagram, "id">,
 ): ApiReturn<Diagram> =>
-  generateApiFunction<Diagram>("post", "/", { json: { ...payload } });
+  generateApiFunction<Diagram>("post", "diagrams/", { json: { ...payload } });
 
 export const updateDiagram = async (
   id: number,
   payload: Partial<Omit<Diagram, "id">>,
 ): ApiReturn<Diagram> =>
-  generateApiFunction<Diagram>("put", `/${id}`, { json: { ...payload } });
+  generateApiFunction<Diagram>("put", `diagrams/${id}/`, {
+    json: { ...payload },
+  });
 
 export const deleteDiagram = async (id: number): ApiReturn<undefined> =>
-  generateApiFunction<undefined>("delete", `/${id}`);
+  generateApiFunction<undefined>("delete", `diagrams/${id}/`);

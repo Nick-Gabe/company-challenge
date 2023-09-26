@@ -1,5 +1,6 @@
 import { ThemeContext } from "contexts";
 import { DiagramImperativeHandle } from "entities";
+import { DiagramsMenu } from "features";
 import { FC, RefObject, useContext } from "react";
 
 type HeaderProps = {
@@ -29,12 +30,7 @@ export const Header: FC<HeaderProps> = ({ diagramRef }) => {
         >
           <img className="w-full h-full" src={theme.icon} />
         </button>
-        <button
-          className="btn bg-blue-300 text-black z-10"
-          onClick={() => console.debug("🚀 ", diagramRef.current?.export())}
-        >
-          Diagrams
-        </button>
+        <DiagramsMenu />
         <button
           className="btn bg-green-300 text-black z-10"
           onClick={() => console.debug("🚀 ", diagramRef.current?.export())}
