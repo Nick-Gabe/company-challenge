@@ -52,3 +52,4 @@ type Viewport = {
 };
 
 type ApiReturn<T> = Promise<[T, boolean]>;
+type ApiError = (error: unknown) => void;
