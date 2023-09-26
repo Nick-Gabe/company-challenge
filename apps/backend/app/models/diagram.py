@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, JSON
+from sqlalchemy import Column, Integer, String, JSON, DateTime
+from sqlalchemy.sql import func
 from dataclasses import dataclass
 from ..models import Base
 
@@ -11,6 +12,9 @@ class Diagram(Base):
     edges: str = Column(JSON)
     nodes: str = Column(JSON)
     viewport: str = Column(JSON)
+    created_at: DateTime = Column(
+        DateTime(timezone=True), server_default=func.now())
+    updated_at: DateTime = Column(DateTime(timezone=True), onupdate=func.now())
 
 
 class Edge:
