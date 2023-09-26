@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { DiagramContext } from "contexts";
+import { FC, useContext } from "react";
 import { Modal } from "shared";
 
 import { useDiagramsModel } from "../model";
@@ -10,10 +11,19 @@ type DiagramsMenuModalProps = {
 export const DiagramsMenuModal: FC<DiagramsMenuModalProps> = ({
   onCloseModal,
 }) => {
+  const { resetDiagramBoard, loadDiagram } = useContext(DiagramContext);
   const [diagramsState, diagramModel] = useDiagramsModel();
 
   return (
-    <Modal onCloseModal={onCloseModal} title="Diagrams List">
+    <Modal
+      onCloseModal={onCloseModal}
+      title="Diagrams List"
+      resetButtonLabel="New"
+      onReset={() => {
+        resetDiagramBoard();
+        onCloseModal();
+      }}
+    >
       <div className="max-h-80  overflow-y-scroll">
         <table className="table">
           <thead className="sticky top-0 bg-[#1D232A]">
@@ -47,7 +57,15 @@ export const DiagramsMenuModal: FC<DiagramsMenuModalProps> = ({
                     ).toLocaleString()}
                   </td>
                   <td className="flex justify-center gap-2 pt-0 pb-1">
-                    <button className="btn btn-ghost">Edit</button>
+                    <button
+                      className="btn btn-ghost"
+                      onClick={() => {
+                        loadDiagram(diagram);
+                        onCloseModal();
+                      }}
+                    >
+                      Edit
+                    </button>
                     <button
                       className={`btn ${
                         isDeleting ? "btn-error" : "btn-ghost"

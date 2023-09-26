@@ -30,6 +30,7 @@ type DiagramContext = {
   updateTitle: (title: string | null) => void;
   setDiagramId: Dispatch<SetStateAction<number | null>>;
   resetDiagramBoard: () => void;
+  loadDiagram: (diagram: Diagram) => void;
 };
 
 export const DiagramContext = createContext({} as DiagramContext);
@@ -46,7 +47,7 @@ export const DiagramContextProvider: FC<
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [title, setTitle] = useState("Untitled");
   const [diagramId, setDiagramId] = useState<number | null>(
-    localStorage.diagramId || null,
+    Number(localStorage.diagramId) || null,
   );
 
   const updateNodeData = (id: string, newData: Record<string, unknown>) => {
@@ -90,6 +91,13 @@ export const DiagramContextProvider: FC<
     setDiagramId(null);
   };
 
+  const loadDiagram = (diagram: Diagram) => {
+    setNodes(diagram.nodes);
+    setEdges(diagram.edges);
+    updateTitle(diagram.title);
+    setDiagramId(diagram.id);
+  };
+
   return (
     <DiagramContext.Provider
       value={{
@@ -105,6 +113,7 @@ export const DiagramContextProvider: FC<
         diagramId,
         setDiagramId,
         resetDiagramBoard,
+        loadDiagram,
       }}
     >
       {children}

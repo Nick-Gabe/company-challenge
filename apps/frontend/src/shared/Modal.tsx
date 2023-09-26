@@ -4,6 +4,8 @@ type ModalProps = {
   onCloseModal: () => void;
   boxClass?: string;
   title: string;
+  resetButtonLabel?: string;
+  onReset?: () => void;
   confirmButtonLabel?: string;
   onConfirm?: () => void;
   confirmButtonDisabled?: boolean;
@@ -14,6 +16,8 @@ export const Modal: FC<ModalProps & PropsWithChildren> = ({
   children,
   boxClass,
   title,
+  resetButtonLabel,
+  onReset,
   confirmButtonLabel,
   onConfirm,
   confirmButtonDisabled,
@@ -36,6 +40,11 @@ export const Modal: FC<ModalProps & PropsWithChildren> = ({
         ) : null}
         {children}
         <div className="modal-action">
+          {resetButtonLabel ? (
+            <button className={"btn btn-neutral z-10"} onClick={onReset}>
+              {resetButtonLabel}
+            </button>
+          ) : null}
           <button className="btn z-10" onClick={onCloseModal}>
             Close
           </button>

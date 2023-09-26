@@ -25,6 +25,7 @@ export const SaveDiagramModal: FC<SaveDiagramModalProps> = (props) => {
       }
       onConfirm={() => {
         saveDiagramModel.createDiagram();
+        saveDiagramModel.setTitle("");
         props.onCloseModal();
       }}
     >
