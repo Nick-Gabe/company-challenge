@@ -4,7 +4,8 @@ This is a monorepo created using `Turbo`, to make an easier connection between a
 Here you can find the documentation about the monorepo as a whole, but if you want a more in-depth explanation of each app and how they're made, you can check their inner README's:
 
 ## Apps
-- [README](./apps/frontend/README.md) | `frontend`: react-typescript app
+- [README](./apps/frontend/README.md) | `frontend`: Made with React, Typescript and Tailwind
+- [README](./apps/backend/README.md) | `backend/policyDB`: REST api in python, flask, sqlite
 
 ## Packages
 - `eslint-config-custom`: shared `eslint` configurations

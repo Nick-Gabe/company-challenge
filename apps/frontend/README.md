@@ -4,6 +4,7 @@ _React + Typescript + Vite_
 ## Description
 - The frontend is made using React with Typescript, along with Tailwind for styling.
 - It also has Eslint and Prettier for greater code quality and maintaining standards.
+- It uses ky as the HTTP client to communicate with Backend.
 
 It is structured using two architectures: [FSD](https://feature-sliced.design/) _(Feature Sliced Design)_ and [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) _(Model-view-controller)_.
 
