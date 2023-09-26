@@ -1,7 +1,9 @@
 from flask import Blueprint, jsonify, request, current_app
+from flask_cors import CORS
 from ..database import TypedCurrentApp
 
 diagrams_bp = Blueprint('diagrams', __name__, url_prefix='/diagrams')
+cors = CORS(diagrams_bp, resources={r'/*': {'origins': '*'}})
 app: TypedCurrentApp = current_app
 
 
