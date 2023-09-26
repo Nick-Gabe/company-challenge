@@ -29,6 +29,7 @@ type DiagramContext = {
   updateNodeData: (id: string, data: Record<string, unknown>) => void;
   updateTitle: (title: string | null) => void;
   setDiagramId: Dispatch<SetStateAction<number | null>>;
+  resetDiagramBoard: () => void;
 };
 
 export const DiagramContext = createContext({} as DiagramContext);
@@ -82,6 +83,13 @@ export const DiagramContextProvider: FC<
     setTitle(title || "Untitled");
   };
 
+  const resetDiagramBoard = () => {
+    setNodes(initialNodes);
+    setEdges(initialEdges);
+    updateTitle(null);
+    setDiagramId(null);
+  };
+
   return (
     <DiagramContext.Provider
       value={{
@@ -96,6 +104,7 @@ export const DiagramContextProvider: FC<
         updateTitle,
         diagramId,
         setDiagramId,
+        resetDiagramBoard,
       }}
     >
       {children}

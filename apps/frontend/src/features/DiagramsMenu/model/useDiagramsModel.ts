@@ -2,12 +2,14 @@ import {
   getAllDiagrams as getAllDiagramsRequest,
   deleteDiagram as deleteDiagramRequest,
 } from "api";
-import { useEffect, useMemo, useState } from "react";
+import { DiagramContext } from "contexts";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 
 const DOUBLE_CLICK_TIME_TO_DELETE = 3000;
 
 export const useDiagramsModel = () => {
+  const { diagramId, resetDiagramBoard } = useContext(DiagramContext);
   const [diagrams, setDiagrams] = useState<Diagram[]>([]);
   const [deleteClickedItems, setDeletedClickedItems] = useState<number[]>([]);
 
@@ -41,6 +43,9 @@ export const useDiagramsModel = () => {
     const [data, ok] = await deleteDiagramRequest(id, errorHandler);
 
     if (ok) {
+      if (id === diagramId) {
+        resetDiagramBoard();
+      }
       fetchDiagrams();
       successHandler();
     }
