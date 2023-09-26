@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 
 import { useDiagramsModel } from "../model";
 
@@ -10,9 +10,16 @@ export const DiagramsMenuModal: FC<DiagramsMenuModalProps> = ({
   onCloseModal,
 }) => {
   const [diagramsState] = useDiagramsModel();
+  const containerRef = useRef<HTMLDialogElement>(null);
 
   return (
-    <dialog className="modal modal-open">
+    <dialog
+      className="modal modal-open"
+      ref={containerRef}
+      onClick={function (event) {
+        event.target === containerRef.current && onCloseModal();
+      }}
+    >
       <div className="modal-box w-[90vw] max-w-3xl">
         <h2 className="font-bold text-lg border-b-1 border-b-slate-700 pb-4 w-full">
           Diagram List
