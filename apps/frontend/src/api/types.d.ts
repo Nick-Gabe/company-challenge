@@ -2,7 +2,7 @@ type Diagram = {
   id: number;
   title: string;
   edges: Edge[];
-  nodes: Node[];
+  nodes: DiagramNode[];
   viewport: Viewport;
   created_at: string;
   updated_at: string;
@@ -12,13 +12,13 @@ type Edge = {
   id: string;
   source: string;
   target: string;
-  animated: string;
+  animated: boolean;
   label: string;
   sourceHandle: string;
   targetHandle: string;
 };
 
-type Node = {
+type DiagramNode = {
   id: string;
   data: string;
   height: number;

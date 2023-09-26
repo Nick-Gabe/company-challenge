@@ -81,7 +81,7 @@ export const useDiagramModel = () => {
     onEdgesChange,
     onConnect,
     createNode,
-    export: toObject,
+    export: toObject as unknown as () => Diagram,
   };
 
   return [state, model] as const;

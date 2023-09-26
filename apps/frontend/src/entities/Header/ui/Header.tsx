@@ -1,6 +1,7 @@
-import { ThemeContext } from "contexts";
+import { DiagramContext, ThemeContext } from "contexts";
 import { DiagramImperativeHandle } from "entities";
 import { DiagramsMenu } from "features";
+import { SaveDiagram } from "features/SaveDiagram";
 import { FC, RefObject, useContext } from "react";
 
 type HeaderProps = {
@@ -9,6 +10,7 @@ type HeaderProps = {
 
 export const Header: FC<HeaderProps> = ({ diagramRef }) => {
   const { theme, switchTheme, isDark } = useContext(ThemeContext);
+  const { title } = useContext(DiagramContext);
 
   return (
     <div
@@ -21,7 +23,7 @@ export const Header: FC<HeaderProps> = ({ diagramRef }) => {
         <h1>Diagram Decision Maker</h1>
       </div>
       <div className="flex justify-center text-center row-start-3 sm:row-auto">
-        <p>Untitled</p>
+        <p>{title}</p>
       </div>
       <div className="flex gap-2 justify-center sm:justify-end">
         <button
@@ -31,12 +33,7 @@ export const Header: FC<HeaderProps> = ({ diagramRef }) => {
           <img className="w-full h-full" src={theme.icon} />
         </button>
         <DiagramsMenu />
-        <button
-          className="btn bg-green-300 text-black z-10"
-          onClick={() => console.debug("🚀 ", diagramRef.current?.export())}
-        >
-          Save
-        </button>
+        <SaveDiagram diagramRef={diagramRef} />
       </div>
     </div>
   );

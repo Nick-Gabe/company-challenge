@@ -21,7 +21,7 @@ class Edge:
     id: str
     source: str
     target: str
-    animated: str
+    animated: bool
     label: str
     sourceHandle: str
     targetHandle: str

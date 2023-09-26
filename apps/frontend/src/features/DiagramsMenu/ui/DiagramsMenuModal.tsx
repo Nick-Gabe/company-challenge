@@ -13,11 +13,7 @@ export const DiagramsMenuModal: FC<DiagramsMenuModalProps> = ({
   const [diagramsState, diagramModel] = useDiagramsModel();
 
   return (
-    <Modal onCloseModal={onCloseModal}>
-      <h2 className="font-bold text-lg border-b-1 border-b-slate-700 pb-4 w-full">
-        Diagrams List
-      </h2>
-
+    <Modal onCloseModal={onCloseModal} title="Diagrams List">
       <div className="max-h-80  overflow-y-scroll">
         <table className="table">
           <thead className="sticky top-0 bg-[#1D232A]">
