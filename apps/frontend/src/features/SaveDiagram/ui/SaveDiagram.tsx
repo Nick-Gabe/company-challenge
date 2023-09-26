@@ -2,6 +2,7 @@ import { DiagramImperativeHandle } from "entities";
 import { FC, RefObject, useState } from "react";
 import { createPortal } from "react-dom";
 
+import { useSaveDiagram } from "../model";
 import { SaveDiagramModal } from "./SaveDiagramModal";
 
 type SaveDiagramProps = {
@@ -10,12 +11,17 @@ type SaveDiagramProps = {
 
 export const SaveDiagram: FC<SaveDiagramProps> = ({ diagramRef }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [saveDiagramState, saveDiagramModel] = useSaveDiagram({ diagramRef });
 
   return (
     <>
       <button
         className="btn bg-green-300 text-black z-10"
-        onClick={() => setModalOpen(true)}
+        onClick={() => {
+          saveDiagramState.isNewDiagram
+            ? setModalOpen(true)
+            : saveDiagramModel.updateDiagram();
+        }}
       >
         Save
       </button>
@@ -23,7 +29,7 @@ export const SaveDiagram: FC<SaveDiagramProps> = ({ diagramRef }) => {
         ? createPortal(
             <SaveDiagramModal
               onCloseModal={() => setModalOpen(false)}
-              diagramRef={diagramRef}
+              saveDiagramModel={[saveDiagramState, saveDiagramModel]}
             />,
             document.getElementById("root")!,
           )

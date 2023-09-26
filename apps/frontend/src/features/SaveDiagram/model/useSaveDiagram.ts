@@ -1,4 +1,7 @@
-import { createDiagram as createDiagramRequest } from "api";
+import {
+  createDiagram as createDiagramRequest,
+  updateDiagram as updateDiagramRequest,
+} from "api";
 import { DiagramContext } from "contexts";
 import { DiagramImperativeHandle } from "entities";
 import { RefObject, useContext, useEffect, useState } from "react";
@@ -9,8 +12,9 @@ type UseSaveDiagramProps = {
 };
 
 export const useSaveDiagram = ({ diagramRef }: UseSaveDiagramProps) => {
-  const { updateTitle, setDiagramId } = useContext(DiagramContext);
-  const [title, setTitle] = useState("");
+  const { updateTitle, setDiagramId, diagramId, title } =
+    useContext(DiagramContext);
+  const [inputTitle, setInputTitle] = useState("");
   const [error, setError] = useState(false);
 
   const errorHandler = () => {
@@ -21,15 +25,15 @@ export const useSaveDiagram = ({ diagramRef }: UseSaveDiagramProps) => {
   };
 
   const successHandler = () => {
-    toast("Diagram created successfully!", {
+    toast("Diagram saved successfully!", {
       type: "success",
       position: "bottom-right",
     });
   };
 
   useEffect(() => {
-    setError(!!title && (title.length < 3 || title.length > 30));
-  }, [title]);
+    setError(!!inputTitle && (inputTitle.length < 3 || inputTitle.length > 30));
+  }, [inputTitle]);
 
   const createDiagram = async () => {
     if (error) return;
@@ -37,20 +41,37 @@ export const useSaveDiagram = ({ diagramRef }: UseSaveDiagramProps) => {
     const diagram = diagramRef.current?.export();
     if (diagram) {
       const [data, ok] = await createDiagramRequest(
-        { ...diagram, title },
+        { ...diagram, title: inputTitle },
         errorHandler,
       );
       if (ok) {
         successHandler();
-        updateTitle(title);
+        updateTitle(inputTitle);
         setDiagramId(data.id);
       }
     }
   };
 
-  const state = { title, error };
+  const updateDiagram = async () => {
+    if (error) return;
+    if (!diagramId) return errorHandler();
 
-  const model = { createDiagram, setTitle };
+    const diagram = diagramRef.current?.export();
+    if (diagram) {
+      const [, ok] = await updateDiagramRequest(
+        diagramId,
+        { ...diagram, title: inputTitle || title },
+        errorHandler,
+      );
+      if (ok) {
+        successHandler();
+      }
+    }
+  };
+
+  const state = { inputTitle, error, isNewDiagram: !diagramId };
+
+  const model = { createDiagram, updateDiagram, setTitle: setInputTitle };
 
   return [state, model] as const;
 };

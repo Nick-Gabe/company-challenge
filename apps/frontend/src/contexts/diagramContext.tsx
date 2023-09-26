@@ -59,7 +59,9 @@ export const DiagramContextProvider: FC<
   useEffect(() => {
     (async function () {
       if (diagramId) {
-        const [data] = await getDiagram(diagramId);
+        const [data, ok] = await getDiagram(diagramId);
+
+        if (!ok) return setDiagramId(null);
 
         setNodes(data.nodes);
         setEdges(data.edges);
