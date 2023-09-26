@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, JSON
 from dataclasses import dataclass
 from ..models import Base
 
@@ -6,14 +6,52 @@ from ..models import Base
 @dataclass
 class Diagram(Base):
     __tablename__ = 'diagrams'
-
     id: int = Column(Integer, primary_key=True)
-    text: str = Column(String)
+    title: str = Column(String)
+    edges: str = Column(JSON)
+    nodes: str = Column(JSON)
+    viewport: str = Column(JSON)
 
-    def __init__(self, text: str, id=None):
-        self.text = text
-        if id:
-            self.id = id
 
-    def __repr__(self):
-        return f"<Diagram(id={self.id}, text='{self.text}')>"
+class Edge:
+    id: str
+    source: str
+    target: str
+    animated: str
+    label: str
+    sourceHandle: str
+    targetHandle: str
+
+
+class NodePosition():
+    x: int
+    y: int
+
+
+class NodeData():
+    maxConnections: int
+    isConnectable: bool
+    parameter: str
+    operation: str
+    value: str
+    decision: str
+
+
+class Node:
+    id: str
+    data: str
+    height: int
+    position: str
+    positionAbsolute: str
+    type: str
+    width: int
+    deletable: bool
+    selected: bool
+    dragging: bool
+    diagram_id: int
+
+
+class Viewport:
+    x: int
+    y: int
+    zoom: int

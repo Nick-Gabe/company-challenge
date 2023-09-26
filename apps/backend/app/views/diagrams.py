@@ -8,7 +8,7 @@ app: TypedCurrentApp = current_app
 @diagrams_bp.route('/', methods=['POST'])
 def create_diagram():
     data = request.get_json()
-    new_diagram = app.db.create_diagram(text=data['text'])
+    new_diagram = app.db.create_diagram(**data)
     return jsonify(new_diagram), 201
 
 
@@ -29,7 +29,7 @@ def get_diagram(id):
 @diagrams_bp.route('/<string:id>', methods=['PUT'])
 def update_diagram(id):
     data = request.get_json()
-    new_diagram = app.db.update_diagram(id=id, text=data['text'])
+    new_diagram = app.db.update_diagram(id=id, **data)
     return jsonify(new_diagram)
 
 
