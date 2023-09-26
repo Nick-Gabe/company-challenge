@@ -29,6 +29,7 @@ type DiagramNode = {
   deletable: boolean;
   selected: boolean;
   dragging: boolean;
+  text: string;
 };
 
 type NodePosition = {

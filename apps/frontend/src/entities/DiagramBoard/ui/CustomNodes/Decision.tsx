@@ -2,6 +2,8 @@ import { DiagramContext } from "contexts/diagramContext";
 import { FC, useContext } from "react";
 import { Handle, NodeProps, Position } from "reactflow";
 
+import { DestroyButton } from "./DestroyButton";
+
 const decisionOptions = [
   {
     label: "TRUE",
@@ -44,6 +46,7 @@ const DecisionNode: FC<NodeProps<DecisionNodeData>> = ({
           </option>
         ))}
       </select>
+      <DestroyButton id={id} />
     </div>
   );
 };

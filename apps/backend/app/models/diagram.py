@@ -39,6 +39,7 @@ class NodeData():
     operation: str
     value: str
     decision: str
+    text: str
 
 
 class Node:

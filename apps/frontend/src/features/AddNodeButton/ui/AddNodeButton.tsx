@@ -18,6 +18,11 @@ const subButtons: Pick<
     imageSrc: "assets/flag.svg",
     backgroundColor: "bg-gray-300",
   },
+  {
+    nodeName: "text",
+    imageSrc: "assets/text.svg",
+    backgroundColor: "bg-white",
+  },
 ];
 
 type AddNodeButtonProps = {

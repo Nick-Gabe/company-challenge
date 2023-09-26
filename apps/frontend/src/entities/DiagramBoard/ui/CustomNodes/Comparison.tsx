@@ -2,6 +2,8 @@ import { DiagramContext } from "contexts/diagramContext";
 import { FC, useContext } from "react";
 import { Handle, NodeProps, Position } from "reactflow";
 
+import { DestroyButton } from "./DestroyButton";
+
 const comparisonSymbols = ["=", "<", "<=", ">=", ">"] as const;
 
 type ComparisonNodeData = {
@@ -70,6 +72,7 @@ const ComparisonNode: FC<NodeProps<ComparisonNodeData>> = ({
         position={Position.Bottom}
         isConnectable={isConnectable}
       />
+      <DestroyButton id={id} />
     </div>
   );
 };

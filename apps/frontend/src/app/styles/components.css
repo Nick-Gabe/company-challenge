@@ -1,3 +1,12 @@
 .react-flow__node.selected :is(.react-flow__node-default,.handle-indicators > *) {
   box-shadow: inset 0 0 0 1px black;
 }
+
+.react-flow__node.selected .destroy-btn {
+  display: inline-flex !important;
+}
+
+.react-flow__node.selected .tooltip:before {
+  font-size: 0.5rem !important;
+  padding: 0 5px;
+}

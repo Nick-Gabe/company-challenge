@@ -43,6 +43,12 @@ export const useCustomNode = () => {
         decision: true,
       },
     },
+    text: {
+      handles: {},
+      initialData: {
+        text: "Insert text",
+      },
+    },
   } as CustomNodeInfo;
 
   const getHandleInfo = (type: string) => {
