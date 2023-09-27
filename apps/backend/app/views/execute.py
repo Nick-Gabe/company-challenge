@@ -20,8 +20,9 @@ def execute(id):
         abort(
             400, description=f'Missing required parameters: {", ".join(missing_parameters)}')
 
-    start = find_by(elems=policy.edges, param='id', value='start')
+    start = find_by(elems=policy.edges, param='sourceHandle', value='start')
     start_node = find_by(elems=policy.nodes, param='id', value=start['target'])
+
     result = decision_cicle_start(data, policy.edges, policy.nodes, start_node)
 
     return jsonify({'decision': result})
