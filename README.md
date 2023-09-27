@@ -5,7 +5,9 @@ Here you can find the documentation about the monorepo as a whole, but if you wa
 
 ## Apps
 - [README](./apps/frontend/README.md) | `frontend`: Made with React, Typescript and Tailwind
-- [README](./apps/backend/README.md) | `backend/policyDB`: REST api in python, flask, sqlite
+- [README](./apps/backend/README.md) | `backend`: REST api in Python and Flask
+- [README](./apps/backend/README.md#about-the-policy-db) | `policyDB`: Local database with sqlite and sqlalchemy
+- [README](./apps/backend/README.md#how-the-execution-engine-works) | `execution engine`: REST Endpoint made in Python
 
 ## Packages
 - `eslint-config-custom`: shared `eslint` configurations
