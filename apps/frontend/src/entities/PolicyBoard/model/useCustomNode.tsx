@@ -47,7 +47,7 @@ export const useCustomNode = () => {
       handles: {},
       size: [303, 111],
       initialData: {
-        text: "Insert text",
+        text: "",
       },
     },
   } as CustomNodeInfo;

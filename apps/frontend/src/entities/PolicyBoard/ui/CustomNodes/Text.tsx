@@ -1,4 +1,4 @@
-import { PolicyContext } from "contexts";
+import { PolicyContext, ThemeContext } from "contexts";
 import { FC, useContext, useEffect, useRef } from "react";
 import { NodeProps } from "reactflow";
 
@@ -10,6 +10,7 @@ type TextNodeData = {
 
 const TextNode: FC<NodeProps<TextNodeData>> = ({ data, id }) => {
   const { updateNodeData } = useContext(PolicyContext);
+  const { isDark } = useContext(ThemeContext);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const expand = () => {
@@ -28,8 +29,11 @@ const TextNode: FC<NodeProps<TextNodeData>> = ({ data, id }) => {
     <div>
       <textarea
         ref={textareaRef}
-        className="textarea text-center bg-transparent text-black p-0 whitespace-wrap overflow-hidden border-gray-100"
+        className={`textarea text-center bg-transparent ${
+          isDark ? "text-white border-gray-700" : "text-black border-gray-100"
+        } p-0 whitespace-wrap overflow-hidden `}
         value={data.text}
+        placeholder="Insert text"
         onInput={expand}
         onChange={(e) => updateNodeData(id, { text: e.target.value })}
       />
