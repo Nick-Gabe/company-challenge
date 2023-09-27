@@ -31,7 +31,8 @@ def get_policy(id):
 @policies_bp.route('/<string:id>', methods=['PUT'])
 def update_policy(id):
     data = request.get_json()
-    new_policy = app.db.update_policy(id=id, **data)
+    new_policy = app.db.update_policy(
+        id=id, edges=data['edges'], nodes=data['nodes'], title=data['title'], viewport=data['viewport'])
     return jsonify(new_policy)
 
 
