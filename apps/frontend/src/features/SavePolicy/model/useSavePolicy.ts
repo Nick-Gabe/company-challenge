@@ -20,11 +20,15 @@ export const useSavePolicy = ({ policyRef }: UseSavePolicyProps) => {
   const [error, setError] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
-  const errorHandler = () => {
-    toast("Oops! Something went wrong while saving. Please try again later!", {
-      type: "error",
-      position: "bottom-right",
-    });
+  const errorHandler = (errorMsg?: string) => {
+    toast(
+      errorMsg ||
+        "Oops! Something went wrong while saving. Please try again later!",
+      {
+        type: "error",
+        position: "bottom-right",
+      },
+    );
   };
 
   const successHandler = () => {

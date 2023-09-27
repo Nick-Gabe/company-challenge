@@ -13,11 +13,15 @@ export const usePoliciesModel = () => {
   const [policies, setPolicies] = useState<Policy[]>([]);
   const [deleteClickedItems, setDeletedClickedItems] = useState<number[]>([]);
 
-  const errorHandler = () => {
-    toast("Oops! Something went wrong on our end. Please try again later.", {
-      type: "error",
-      position: "bottom-right",
-    });
+  const errorHandler = (errorMsg?: string) => {
+    toast(
+      errorMsg ||
+        "Oops! Something went wrong on our end. Please try again later.",
+      {
+        type: "error",
+        position: "bottom-right",
+      },
+    );
   };
 
   const successHandler = () => {

@@ -6,9 +6,11 @@ type DestroyButtonProps = {
 };
 
 export const DestroyButton: FC<DestroyButtonProps> = ({ id }) => {
-  const { setNodes } = useContext(PolicyContext);
-  const destroy = () =>
+  const { setNodes, setEdges } = useContext(PolicyContext);
+  const destroy = () => {
     setNodes((nodes) => nodes.filter((node) => node.id !== id));
+    setEdges((edges) => edges.filter((edge) => edge.target !== id));
+  };
 
   return (
     <div

@@ -2,9 +2,9 @@ from typing import Union
 from ..models.policy import Edge, Node
 
 
-def find(elems: Union[Edge, Node], id: str) -> Union[Edge, Node]:
+def find_by(elems, param: str, value: str) -> Union[Edge, Node]:
     for elem in elems:
-        if elem['id'] == id:
+        if elem[param] == value:
             return elem
     return None
 
@@ -34,11 +34,15 @@ def compare(data, node: Node):
 
 
 def decision_cicle_start(data, edges: list[Edge], nodes: list[Node], node: Node):
-    if node['type'] == 'comparison':
+    if not node:
+        return True
+    elif node['type'] == 'comparison':
         result = compare(data, node)
         edge = find_edge_by_source(
             edges, node['id'], 'YES' if result else 'NO')
-        next_node = find(nodes, edge['target'])
+        if not edge:
+            return result
+        next_node = find_by(elems=nodes, param='id', value=edge['target'])
         return decision_cicle_start(data, edges, nodes, next_node)
     elif node['type'] == 'decision':
         return node['data']['decision']

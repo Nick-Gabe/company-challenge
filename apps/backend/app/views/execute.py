@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, current_app, abort
 from flask_cors import CORS
 from ..database import TypedCurrentApp
-from ..services.execute import find, decision_cicle_start, check_missing_parameters
+from ..services.execute import find_by, decision_cicle_start, check_missing_parameters
 
 execute_bp = Blueprint('execute', __name__, url_prefix='/execute')
 cors = CORS(execute_bp, resources={r'/*': {'origins': '*'}})
@@ -20,8 +20,8 @@ def execute(id):
         abort(
             400, description=f'Missing required parameters: {", ".join(missing_parameters)}')
 
-    start = find(policy.edges, 'start')
-    start_node = find(policy.nodes, start['target'])
+    start = find_by(elems=policy.edges, param='id', value='start')
+    start_node = find_by(elems=policy.nodes, param='id', value=start['target'])
     result = decision_cicle_start(data, policy.edges, policy.nodes, start_node)
 
     return jsonify({'decision': result})

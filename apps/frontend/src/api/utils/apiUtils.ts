@@ -16,7 +16,8 @@ export const generateApiFunction = async <T>(
       response.statusText !== "NO CONTENT" ? await response.json<T>() : "";
     return [data as T, response.ok];
   } catch (error) {
-    errorHandler?.(error);
+    const errorMsg = await error.response.json();
+    errorHandler?.(errorMsg.error, error);
     console.error(error);
     return [error as T, false];
   }
