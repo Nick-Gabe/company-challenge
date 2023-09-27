@@ -38,7 +38,11 @@ const DecisionNode: FC<NodeProps<DecisionNodeData>> = ({
       <select
         className="mt-1 select select-bordered bg-white select-xs"
         defaultValue={String(data.decision)}
-        onChange={(e) => updateNodeData(id, { decision: e.target.value })}
+        onChange={(e) =>
+          updateNodeData(id, {
+            decision: e.target.value === "true" ? true : false,
+          })
+        }
       >
         {decisionOptions.map((decision) => (
           <option key={decision.label} value={String(decision.value)}>

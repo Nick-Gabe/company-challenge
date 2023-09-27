@@ -51,7 +51,12 @@ const ComparisonNode: FC<NodeProps<ComparisonNodeData>> = ({
           type={data.operation === "=" ? "text" : "number"}
           placeholder="value"
           value={data.value}
-          onChange={(e) => updateNodeData(id, { value: e.target.value })}
+          onChange={(e) => {
+            const val = e.target.value;
+            updateNodeData(id, {
+              value: isNaN(Number(val)) ? val : Number(val),
+            });
+          }}
         />
       </div>
       <div className="w-full h-full absolute overflow-hidden top-0 left-0 pointer-events-none handle-indicators">
