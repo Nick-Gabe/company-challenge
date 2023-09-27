@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, current_app
+from flask import Blueprint, jsonify, request, current_app, abort
 from flask_cors import CORS
 from ..database import TypedCurrentApp
 from ..services.execute import find, decision_cicle_start, check_missing_parameters
@@ -12,10 +12,13 @@ app: TypedCurrentApp = current_app
 def execute(id):
     data = request.get_json()
     policy = app.db.read_policy(id)
+    if not policy:
+        abort(404)
 
     missing_parameters = check_missing_parameters(data, policy.nodes)
     if len(missing_parameters) != 0:
-        return jsonify({'message': f'Missing needed parameters: {", ".join(missing_parameters)}'}), 400
+        abort(
+            400, description=f'Missing required parameters: {", ".join(missing_parameters)}')
 
     start = find(policy.edges, 'start')
     start_node = find(policy.nodes, start['target'])

@@ -3,6 +3,7 @@ from .config import Config
 from .views.policies import policies_bp
 from .views.execute import execute_bp
 from .database import Database, create_database_tables, TypedCurrentApp
+from .views.error_handlers import register_error_handlers
 
 
 def create_app():
@@ -22,5 +23,6 @@ def create_app():
     app.config.from_object(Config)
     app.register_blueprint(policies_bp)
     app.register_blueprint(execute_bp)
+    register_error_handlers(app)
 
     return app
