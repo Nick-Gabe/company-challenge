@@ -18,8 +18,3 @@ def register_error_handlers(app: Flask):
     def type_error_handler(error):
         if "required positional arguments" in str(error):
             return jsonify({'error': 'Missing required arguments'}), 400
-
-    @app.errorhandler(KeyError)
-    def type_error_handler(error):
-        if error.forced:
-            return jsonify({'error': 'Missing required arguments'}), 400

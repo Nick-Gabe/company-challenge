@@ -16,8 +16,8 @@ def all_comparisons_filled(data):
         if edge['targetHandle'] == 'target':
             target = find_by(elems=data['nodes'],
                              param='id', value=edge['target'])
-            data = target['data']
-            if data['parameter'].strip() == '' or data['value'].strip() == '' and data['operation'] != '=':
+            targetData = target['data']
+            if targetData['parameter'].strip() == '' or targetData['value'].strip() == '' and targetData['operation'] != '=':
                 return False
     return True
 
