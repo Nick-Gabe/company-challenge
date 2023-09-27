@@ -16,6 +16,7 @@ import {
   useEdgesState,
   useNodesState,
 } from "reactflow";
+import { generateInitialDiagramNodes } from "widgets/PolicyMaker/model";
 
 type PolicyContext = {
   nodes: Node[];
@@ -35,16 +36,9 @@ type PolicyContext = {
 
 export const PolicyContext = createContext({} as PolicyContext);
 
-type PolicyContextProviderProps = {
-  initialNodes: Node[];
-  initialEdges: Edge[];
-};
-
-export const PolicyContextProvider: FC<
-  PropsWithChildren & PolicyContextProviderProps
-> = ({ initialEdges, initialNodes, children }) => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+export const PolicyContextProvider: FC<PropsWithChildren> = ({ children }) => {
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [title, setTitle] = useState("Untitled");
   const [policyId, setPolicyId] = useState<number | null>(
     Number(localStorage.policyId) || null,
@@ -59,6 +53,10 @@ export const PolicyContextProvider: FC<
   };
 
   useEffect(() => {
+    const { initialEdges, initialNodes } = generateInitialDiagramNodes();
+    setEdges(initialEdges);
+    setNodes(initialNodes);
+
     (async function () {
       if (policyId) {
         const [data, ok] = await getPolicy(policyId);
@@ -85,6 +83,7 @@ export const PolicyContextProvider: FC<
   };
 
   const resetPolicyBoard = () => {
+    const { initialEdges, initialNodes } = generateInitialDiagramNodes();
     setNodes(initialNodes);
     setEdges(initialEdges);
     updateTitle(null);

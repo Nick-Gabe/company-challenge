@@ -1,6 +1,7 @@
 import { PolicyContext } from "contexts/policyContext";
 import { useCallback, MouseEvent, useContext } from "react";
 import { Connection, Edge, addEdge, useReactFlow } from "reactflow";
+import { generateId } from "shared";
 
 import { useCustomNode } from ".";
 
@@ -9,11 +10,6 @@ export const usePolicyModel = () => {
     useContext(PolicyContext);
   const { project, getNode, toObject } = useReactFlow();
   const [, customNodeModel] = useCustomNode();
-
-  const getId = useCallback(() => {
-    const lastId = Number(nodes.at(-1)?.id);
-    return String((lastId || 0) + 1);
-  }, [nodes]);
 
   const onConnect = useCallback(
     (params: Edge | Connection) => {
@@ -51,7 +47,7 @@ export const usePolicyModel = () => {
 
   const createNode = useCallback(
     (event: MouseEvent, type: string) => {
-      const id = getId();
+      const id = generateId();
 
       const [width, height] = customNodeModel.getSize(type) || [0, 0];
       const initialData = customNodeModel.getInitialData(type);
