@@ -6,13 +6,13 @@ session = Session()
 
 
 class Database:
-    def read_policies(self):
+    def read_policies(self) -> list[Policy]:
         return session.query(Policy).all()
 
-    def read_policy(self, id: str):
+    def read_policy(self, id: str) -> Policy:
         return session.query(Policy).get(id)
 
-    def create_policy(self, title: str, edges: list[Edge], nodes: list[Node], viewport: Viewport):
+    def create_policy(self, title: str, edges: list[Edge], nodes: list[Node], viewport: Viewport) -> Policy:
         new_policy = Policy(
             title=title, edges=edges, nodes=nodes, viewport=viewport
         )
@@ -21,7 +21,7 @@ class Database:
 
         return self.read_policy(id=new_policy.id)
 
-    def update_policy(self, id: str, title: str, edges: list[Edge], nodes: list[Node], viewport: Viewport):
+    def update_policy(self, id: str, title: str, edges: list[Edge], nodes: list[Node], viewport: Viewport) -> Policy:
         session.query(Policy).filter_by(id=id).update({
             'title': title,
             'edges': edges,
@@ -32,7 +32,7 @@ class Database:
 
         return self.read_policy(id=id)
 
-    def delete_policy(self, id: str):
+    def delete_policy(self, id: str) -> bool:
         policy = session.query(Policy).filter_by(id=id)
         if policy.first() == None:
             return None
@@ -41,7 +41,7 @@ class Database:
         session.commit()
         return not self.policy_exists(id=id)
 
-    def policy_exists(self, id: str):
+    def policy_exists(self, id: str) -> bool:
         return session.query(Policy).get(id) != None
 
     def close_connection(self, execution=None):

@@ -44,10 +44,10 @@ class NodeData():
 
 class Node:
     id: str
-    data: str
+    data: NodeData
     height: int
-    position: str
-    positionAbsolute: str
+    position: NodePosition
+    positionAbsolute: NodePosition
     type: str
     width: int
     deletable: bool
