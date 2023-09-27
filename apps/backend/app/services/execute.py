@@ -39,8 +39,6 @@ def decision_cicle_start(data, edges: list[Edge], nodes: list[Node], node: Node)
         edge = find_edge_by_source(
             edges, node['id'], 'YES' if result else 'NO')
         next_node = find(nodes, edge['target'])
-        print(f"next node is {edge['target']}")
-        print(next_node)
         return decision_cicle_start(data, edges, nodes, next_node)
     elif node['type'] == 'decision':
         return node['data']['decision']
