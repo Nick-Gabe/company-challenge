@@ -3,11 +3,23 @@ from ..database import TypedCurrentApp
 
 
 def contains_only_start_node(data):
-    decisions = find_by(elems=data['nodes'], param='type', value='decision')
-    comparisons = find_by(elems=data['nodes'],
-                          param='type', value='comparison')
+    decisions = find_by(elems=data['edges'],
+                        param='targetHandle', value='decision-target')
+    comparisons = find_by(elems=data['edges'],
+                          param='targetHandle', value='target')
 
     return not decisions and not comparisons
+
+
+def all_comparisons_filled(data):
+    for edge in data['edges']:
+        if edge['targetHandle'] == 'target':
+            target = find_by(elems=data['nodes'],
+                             param='id', value=edge['target'])
+            data = target['data']
+            if data['parameter'].strip() == '' or data['value'].strip() == '' and data['operation'] != '=':
+                return False
+    return True
 
 
 def create_policy_service(app: TypedCurrentApp, data):
