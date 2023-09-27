@@ -28,14 +28,14 @@ export const PoliciesMenuModal: FC<PoliciesMenuModalProps> = ({
         <table className="table">
           <thead className="sticky top-0 bg-[#1D232A]">
             <tr>
-              <th></th>
+              <th>ID</th>
               <th>Title</th>
               <th>Updated at</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {policiesState.policies?.map((policy, index) => {
+            {policiesState.policies?.map((policy) => {
               const isDeleting = policiesState.deleteClickedItems.includes(
                 policy.id,
               );
@@ -45,7 +45,7 @@ export const PoliciesMenuModal: FC<PoliciesMenuModalProps> = ({
                   className="border-bottom-1 border-slate-700"
                   key={policy.id}
                 >
-                  <td className="py-0">{index + 1}</td>
+                  <td className="py-0">{policy.id}</td>
                   <td className="py-0">
                     <p className="max-w-[120px] sm:max-w-[200px] text-ellipsis overflow-hidden whitespace-nowrap">
                       {policy.title}

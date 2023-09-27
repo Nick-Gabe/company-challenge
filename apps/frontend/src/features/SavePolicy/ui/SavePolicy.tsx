@@ -16,7 +16,10 @@ export const SavePolicy: FC<SavePolicyProps> = ({ policyRef }) => {
   return (
     <>
       <button
-        className="btn bg-green-300 text-black z-10"
+        className={`btn  ${
+          savePolicyState.disabled ? "btn-disabled" : "bg-green-300"
+        } text-black z-10`}
+        disabled={savePolicyState.disabled}
         onClick={() => {
           savePolicyState.isNewPolicy
             ? setModalOpen(true)

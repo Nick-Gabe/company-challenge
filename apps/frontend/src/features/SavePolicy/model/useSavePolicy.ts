@@ -11,11 +11,14 @@ type UseSavePolicyProps = {
   policyRef: RefObject<PolicyImperativeHandle>;
 };
 
+const BUTTON_DISABLED_TIME = 5000;
+
 export const useSavePolicy = ({ policyRef }: UseSavePolicyProps) => {
   const { updateTitle, setPolicyId, policyId, title } =
     useContext(PolicyContext);
   const [inputTitle, setInputTitle] = useState("");
   const [error, setError] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   const errorHandler = () => {
     toast("Oops! Something went wrong while saving. Please try again later!", {
@@ -29,6 +32,10 @@ export const useSavePolicy = ({ policyRef }: UseSavePolicyProps) => {
       type: "success",
       position: "bottom-right",
     });
+    setDisabled(true);
+    setTimeout(() => {
+      setDisabled(false);
+    }, BUTTON_DISABLED_TIME);
   };
 
   useEffect(() => {
@@ -36,7 +43,7 @@ export const useSavePolicy = ({ policyRef }: UseSavePolicyProps) => {
   }, [inputTitle]);
 
   const createPolicy = async () => {
-    if (error) return;
+    if (error) return errorHandler();
 
     const policy = policyRef.current?.export();
     if (policy) {
@@ -53,10 +60,10 @@ export const useSavePolicy = ({ policyRef }: UseSavePolicyProps) => {
   };
 
   const updatePolicy = async () => {
-    if (error) return;
-    if (!policyId) return errorHandler();
+    if (!policyId || error) return errorHandler();
 
     const policy = policyRef.current?.export();
+
     if (policy) {
       const [, ok] = await updatePolicyRequest(
         policyId,
@@ -69,7 +76,7 @@ export const useSavePolicy = ({ policyRef }: UseSavePolicyProps) => {
     }
   };
 
-  const state = { inputTitle, error, isNewPolicy: !policyId };
+  const state = { inputTitle, error, disabled, isNewPolicy: !policyId };
 
   const model = { createPolicy, updatePolicy, setTitle: setInputTitle };
 
