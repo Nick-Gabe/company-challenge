@@ -17,7 +17,7 @@ def all_comparisons_filled(data):
             target = find_by(elems=data['nodes'],
                              param='id', value=edge['target'])
             targetData = target['data']
-            if targetData['parameter'].strip() == '' or targetData['value'].strip() == '' and targetData['operation'] != '=':
+            if targetData['parameter'].strip() == '' or targetData['operation'] != '=' and targetData['value'] == '':
                 return False
     return True
 

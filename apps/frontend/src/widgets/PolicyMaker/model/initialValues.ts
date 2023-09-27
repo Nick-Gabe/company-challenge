@@ -74,7 +74,9 @@ export const generateInitialDiagramNodes = () => {
     {
       id: "start",
       source: startId,
+      sourceHandle: "start",
       target: compId,
+      targetHandle: "target",
       animated: true,
     },
     {
@@ -83,7 +85,7 @@ export const generateInitialDiagramNodes = () => {
       target: decisionId,
       targetHandle: "decision-target",
       label: "YES",
-      id: "reactflow__edge-compcomparison-left-1decision-target",
+      id: compId + 2 + decisionId,
     },
   ];
 
