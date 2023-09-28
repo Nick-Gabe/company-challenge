@@ -1,7 +1,16 @@
 # Config Backend // Policy DB // Execution Engine
 _Python + Flask + Sqlite_
 
-### Description
+## Table of Contents:
+- [Config Backend // Policy DB // Execution Engine](#config-backend--policy-db--execution-engine)
+  - [Table of Contents:](#table-of-contents)
+    - [Description and Routes](#description-and-routes)
+    - [How to run](#how-to-run)
+    - [About the Policy DB](#about-the-policy-db)
+    - [How the Execution Engine works](#how-the-execution-engine-works)
+    - [Codebase](#codebase)
+
+### Description and Routes
 - The backend is a REST Api
 - Contains a CRUD for interacting with the PolicyDB, made in `sqlite` with `sqlalchemy` as ORM
 
@@ -54,3 +63,18 @@ Let's suppose my policy is the following:
 Now if I execute it with the data `{ age: 19, income: 900 }`, it will fail in the first check and won't bother checking anything else. But if my data is `{ age: 15, income: 9000}`, it will pass the age check, pass the income check, and will not even read the else condition about income > 5000.
 
 And it also uses the same database as the policies, so the data fetching is super fast and almost real time, changes affect made on it affect the backend and the execution engine almost immediately.
+
+### Codebase
+To have a clear understanding of the folder structure and files, I will describe the files and folders used in the project:
+```
+backend
+├─ package.json (contains project scripts and configurations)
+├─ requirements.txt (lists the libraries used in the project)
+├─ run.py (the main script to run the backend)
+└─ app
+   ├─ models (contains database models for the application)
+   ├─ services (houses the logic for handling requests and responses)
+   ├─ views (holds route controllers and view templates)
+   ├─ database.py (provides functions for interacting with the database)
+   └─ config.py (stores configuration settings for the application)
+```

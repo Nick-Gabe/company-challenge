@@ -1,6 +1,17 @@
 # ConfigFrontend
 _React + Typescript + Vite_
 
+## Table of contents:
+- [ConfigFrontend](#configfrontend)
+  - [Table of contents:](#table-of-contents)
+  - [Description](#description)
+  - [Commands](#commands)
+    - [Run development](#run-development)
+    - [Build](#build)
+    - [Preview](#preview)
+    - [Linting](#linting)
+    - [Codebase](#codebase)
+
 ## Description
 - The frontend is made using React with Typescript, along with Tailwind for styling.
 - It also has Eslint and Prettier for greater code quality and maintaining standards.
@@ -36,3 +47,25 @@ It starts running the production build that was generated.
 pnpm lint
 ```
 It will check through the code to find inconsistencies, if you use `--fix` along with the command it will try to automatically solve some errors.
+
+
+### Codebase
+
+```
+frontend
+├─ public (contains static assets for the frontend)
+├─ src/api (houses API-related code and services)
+├─ src/app
+│   ├─ providers (holds state and context providers)
+│   ├─ styles (stores stylesheets and CSS files)
+├─ src/contexts (contains React context providers)
+├─ src/entities (stores data models and entity-related logic)
+├─ src/features (houses feature-specific components and logic)
+├─ src/pages (contains page-level components)
+├─ src/shared (stores shared components and utilities)
+├─ src/widgets (houses reusable widgets and UI components)
+├─ .eslintrc.js (configuration file for ESLint)
+├─ package.json (contains project scripts and dependencies)
+├─ index.html (the main HTML file for your application)
+└─ tailwind.config.js (configuration for the Tailwind CSS framework)
+```
