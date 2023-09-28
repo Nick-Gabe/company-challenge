@@ -1,3 +1,6 @@
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
+
 import react from "@vitejs/plugin-react";
 import { readdirSync } from "fs";
 import path from "path";
@@ -21,4 +24,8 @@ export default defineConfig({
     },
   },
   plugins: [react(), tsPaths({})],
+  test: {
+    globals: true,
+    environment: "jsdom",
+  },
 });

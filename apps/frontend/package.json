@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -14,6 +15,7 @@
     "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
     "@types/compose-function": "^0.0.31",
     "@types/node": "^20.6.3",
     "@types/react": "^18.2.15",
@@ -23,6 +25,7 @@
     "compose-function": "^3.0.3",
     "daisyui": "^3.7.7",
     "eslint-config-custom": "workspace:*",
+    "jsdom": "^22.1.0",
     "ky": "^1.0.1",
     "postcss": "^8.4.30",
     "postcss-import": "^15.1.0",
@@ -30,6 +33,7 @@
     "reactflow": "^11.8.3",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.5",
-    "vite-tsconfig-paths": "^4.2.1"
+    "vite-tsconfig-paths": "^4.2.1",
+    "vitest": "^0.34.5"
   }
 }
