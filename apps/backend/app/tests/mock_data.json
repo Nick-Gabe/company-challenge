@@ -157,5 +157,201 @@
       "zoom": 2
     },
     "title": "empty comparison"
+  },
+  "complexPolicy": {
+    "created_at": "Wed, 27 Sep 2023 06:02:45 GMT",
+    "edges": [
+      {
+        "animated": true,
+        "id": "start",
+        "selected": false,
+        "source": "7035651712813833",
+        "sourceHandle": "start",
+        "target": "231578047152891",
+        "targetHandle": "target"
+      },
+      {
+        "id": "reactflow__edge-231578047152891comparison-right-29693910633817255decision-target",
+        "label": "NO",
+        "labels": {
+          "comparison-left": "YES",
+          "comparison-right": "NO"
+        },
+        "selected": false,
+        "source": "231578047152891",
+        "sourceHandle": "comparison-right",
+        "target": "29693910633817255",
+        "targetHandle": "decision-target"
+      },
+      {
+        "id": "reactflow__edge-231578047152891comparison-left-7711480493404659target",
+        "label": "YES",
+        "labels": {
+          "comparison-left": "YES",
+          "comparison-right": "NO"
+        },
+        "selected": false,
+        "source": "231578047152891",
+        "sourceHandle": "comparison-left",
+        "target": "7711480493404659",
+        "targetHandle": "target"
+      },
+      {
+        "id": "reactflow__edge-7711480493404659comparison-left-5855171813345119decision-target",
+        "label": "YES",
+        "labels": {
+          "comparison-left": "YES",
+          "comparison-right": "NO"
+        },
+        "selected": false,
+        "source": "7711480493404659",
+        "sourceHandle": "comparison-left",
+        "target": "5855171813345119",
+        "targetHandle": "decision-target"
+      },
+      {
+        "id": "reactflow__edge-7711480493404659comparison-right-6344844041745492decision-target",
+        "label": "NO",
+        "labels": {
+          "comparison-left": "YES",
+          "comparison-right": "NO"
+        },
+        "selected": false,
+        "source": "7711480493404659",
+        "sourceHandle": "comparison-right",
+        "target": "6344844041745492",
+        "targetHandle": "decision-target"
+      }
+    ],
+    "id": 1,
+    "nodes": [
+      {
+        "data": {
+          "isConnectable": true,
+          "maxConnections": 1
+        },
+        "deletable": false,
+        "dragging": false,
+        "height": 40,
+        "id": "7035651712813833",
+        "position": {
+          "x": -508.8074413520908,
+          "y": -204.65241512459795
+        },
+        "positionAbsolute": {
+          "x": -508.8074413520908,
+          "y": -204.65241512459795
+        },
+        "selected": true,
+        "type": "start",
+        "width": 150
+      },
+      {
+        "data": {
+          "operation": ">",
+          "parameter": "age",
+          "value": 18
+        },
+        "dragging": false,
+        "height": 76,
+        "id": "231578047152891",
+        "position": {
+          "x": -549.3074413520908,
+          "y": -146.15241512459795
+        },
+        "positionAbsolute": {
+          "x": -549.3074413520908,
+          "y": -146.15241512459795
+        },
+        "selected": true,
+        "type": "comparison",
+        "width": 206
+      },
+      {
+        "data": {
+          "decision": false
+        },
+        "dragging": false,
+        "height": 68,
+        "id": "29693910633817255",
+        "position": {
+          "x": -438.3074413520908,
+          "y": -38.90241512459795
+        },
+        "positionAbsolute": {
+          "x": -438.3074413520908,
+          "y": -38.90241512459795
+        },
+        "selected": true,
+        "type": "decision",
+        "width": 150
+      },
+      {
+        "data": {
+          "operation": ">",
+          "parameter": "income",
+          "value": 1000
+        },
+        "dragging": false,
+        "height": 76,
+        "id": "7711480493404659",
+        "position": {
+          "x": -653.3074413520908,
+          "y": -43.27741512459795
+        },
+        "positionAbsolute": {
+          "x": -653.3074413520908,
+          "y": -43.27741512459795
+        },
+        "selected": true,
+        "type": "comparison",
+        "width": 206
+      },
+      {
+        "data": {
+          "decision": true
+        },
+        "dragging": false,
+        "height": 68,
+        "id": "5855171813345119",
+        "position": {
+          "x": -668.3074413520908,
+          "y": 63.22258487540205
+        },
+        "positionAbsolute": {
+          "x": -668.3074413520908,
+          "y": 63.22258487540205
+        },
+        "selected": true,
+        "type": "decision",
+        "width": 150
+      },
+      {
+        "data": {
+          "decision": false
+        },
+        "dragging": false,
+        "height": 68,
+        "id": "6344844041745492",
+        "position": {
+          "x": -511.8074413520908,
+          "y": 61.22258487540205
+        },
+        "positionAbsolute": {
+          "x": -511.8074413520908,
+          "y": 61.22258487540205
+        },
+        "selected": true,
+        "type": "decision",
+        "width": 150
+      }
+    ],
+    "title": "default",
+    "updated_at": "Wed, 27 Sep 2023 14:39:02 GMT",
+    "viewport": {
+      "x": 1705.3805353835,
+      "y": 565.0384757067858,
+      "zoom": 2
+    }
   }
 }
