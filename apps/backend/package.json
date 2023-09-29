@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "python3 run.py",
-    "dev-win": "python run.py"
+    "dev-win": "python run.py",
+    "test": "cd app/tests && pytest"
   }
 }

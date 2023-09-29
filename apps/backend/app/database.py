@@ -1,17 +1,17 @@
 from flask import Flask
-from .models import Session, Base, engine
+from .models import Base
 from .models.policy import Policy, Edge, Node, Viewport
 
 
 class Database:
-    def __init__(self) -> None:
+    def __init__(self, Session) -> None:
         self.session = Session()
 
     def read_policies(self) -> list[Policy]:
         return self.session.query(Policy).all()
 
     def read_policy(self, id: str) -> Policy:
-        return self.session.query(Policy).get(id)
+        return self.session.get(Policy, id)
 
     def create_policy(self, title: str, edges: list[Edge], nodes: list[Node], viewport: Viewport) -> Policy:
         new_policy = Policy(
@@ -43,13 +43,17 @@ class Database:
         return not self.policy_exists(id=id)
 
     def policy_exists(self, id: str) -> bool:
-        return self.session.query(Policy).get(id) != None
+        return self.session.get(Policy, id) != None
+
+    def clear_database(self):
+        self.session.query(Policy).delete()
+        self.session.commit()
 
     def close_connection(self, execution=None):
         self.session.close()
 
 
-def create_database_tables():
+def create_database_tables(Session, engine):
     session = Session()
     Base.metadata.create_all(engine)
     session.commit()

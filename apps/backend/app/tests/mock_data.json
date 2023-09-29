@@ -1,0 +1,161 @@
+{
+  "empty": {},
+  "simple": {
+    "nodes": [
+      {
+        "width": 150,
+        "height": 40,
+        "data": {
+          "isConnectable": true,
+          "maxConnections": 1
+        },
+        "deletable": false,
+        "dragging": false,
+        "id": "39394084518551553",
+        "position": {
+          "x": 34,
+          "y": -20
+        },
+        "positionAbsolute": {
+          "x": 34,
+          "y": -20
+        },
+        "selected": false,
+        "type": "start"
+      },
+      {
+        "width": 206,
+        "height": 76,
+        "data": {
+          "operation": "=",
+          "parameter": "name",
+          "value": "nick"
+        },
+        "dragging": false,
+        "id": "044484949597756396",
+        "position": {
+          "x": 6.5,
+          "y": 52
+        },
+        "positionAbsolute": {
+          "x": 6.5,
+          "y": 52
+        },
+        "selected": true,
+        "type": "comparison"
+      }
+    ],
+    "edges": [
+      {
+        "animated": true,
+        "id": "start",
+        "source": "39394084518551553",
+        "sourceHandle": "start",
+        "target": "044484949597756396",
+        "targetHandle": "target",
+        "selected": false
+      }
+    ],
+    "viewport": {
+      "x": 293,
+      "y": 390.25,
+      "zoom": 2
+    },
+    "title": "is nick"
+  },
+  "onlyStartNode": {
+    "nodes": [
+      {
+        "width": 150,
+        "height": 40,
+        "data": {
+          "isConnectable": true,
+          "maxConnections": 1
+        },
+        "deletable": false,
+        "dragging": false,
+        "id": "39394084518551553",
+        "position": {
+          "x": 34,
+          "y": -20
+        },
+        "positionAbsolute": {
+          "x": 34,
+          "y": -20
+        },
+        "selected": false,
+        "type": "start"
+      }
+    ],
+    "edges": [],
+    "viewport": {
+      "x": 293,
+      "y": 390.25,
+      "zoom": 2
+    },
+    "title": "has only start"
+  },
+  "emptyComparison": {
+    "nodes": [
+      {
+        "width": 150,
+        "height": 40,
+        "data": {
+          "isConnectable": true,
+          "maxConnections": 1
+        },
+        "deletable": false,
+        "dragging": false,
+        "id": "39394084518551553",
+        "position": {
+          "x": 34,
+          "y": -20
+        },
+        "positionAbsolute": {
+          "x": 34,
+          "y": -20
+        },
+        "selected": false,
+        "type": "start"
+      },
+      {
+        "width": 206,
+        "height": 76,
+        "data": {
+          "operation": "=",
+          "parameter": "",
+          "value": ""
+        },
+        "dragging": false,
+        "id": "044484949597756396",
+        "position": {
+          "x": 6.5,
+          "y": 52
+        },
+        "positionAbsolute": {
+          "x": 6.5,
+          "y": 52
+        },
+        "selected": true,
+        "type": "comparison"
+      }
+    ],
+    "edges": [
+      {
+        "animated": true,
+        "id": "start",
+        "source": "39394084518551553",
+        "sourceHandle": "start",
+        "target": "044484949597756396",
+        "targetHandle": "target",
+        "selected": false
+      }
+    ],
+    "viewport": {
+      "x": 293,
+      "y": 390.25,
+      "zoom": 2
+    },
+    "title": "empty comparison"
+  }
+}

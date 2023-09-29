@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, current_app, abort
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from ..database import TypedCurrentApp
 from ..services.policies import contains_only_start_node, create_policy_service, update_policy_service, all_comparisons_filled
 
@@ -12,11 +12,12 @@ app: TypedCurrentApp = current_app
 def create_policy():
     data = request.get_json()
 
-    if contains_only_start_node(data):
-        abort(400, description='At least one comparison or decision is required')
-    elif not all_comparisons_filled(data):
-        abort(400, description="Comparisons can't have empty fields")
     try:
+        if contains_only_start_node(data):
+            abort(400, description='At least one comparison or decision is required')
+        elif not all_comparisons_filled(data):
+            abort(400, description="Comparisons can't have empty fields")
+
         new_policy = create_policy_service(app, data)
         return jsonify(new_policy), 201
     except KeyError:
@@ -44,12 +45,12 @@ def update_policy(id):
     if not policy:
         abort(404)
 
-    if contains_only_start_node(data):
-        print('contains start')
-        abort(400, description='At least one comparison or decision is required')
-    elif not all_comparisons_filled(data):
-        abort(400, description="Comparisons can't have empty fields")
     try:
+        if contains_only_start_node(data):
+            print('contains start')
+            abort(400, description='At least one comparison or decision is required')
+        elif not all_comparisons_filled(data):
+            abort(400, description="Comparisons can't have empty fields")
         new_policy = update_policy_service(app, id, data)
         return jsonify(new_policy)
     except KeyError:
