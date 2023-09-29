@@ -10,12 +10,14 @@ _React + Typescript + Vite_
     - [Build](#build)
     - [Preview](#preview)
     - [Linting](#linting)
+    - [Testing](#testing)
     - [Codebase](#codebase)
 
 ## Description
 - The frontend is made using React with Typescript, along with Tailwind for styling.
 - It also has Eslint and Prettier for greater code quality and maintaining standards.
 - It uses ky as the HTTP client to communicate with Backend.
+- Unitary testes made using Vitest + Testing Library
 
 It is structured using two architectures: [FSD](https://feature-sliced.design/) _(Feature Sliced Design)_ and [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) _(Model-view-controller)_.
 
@@ -47,6 +49,12 @@ It starts running the production build that was generated.
 pnpm lint
 ```
 It will check through the code to find inconsistencies, if you use `--fix` along with the command it will try to automatically solve some errors.
+
+### Testing
+```
+pnpm test
+```
+Using vitest and testing-library it will run the unitary tests in the project.
 
 
 ### Codebase

@@ -13,6 +13,7 @@ _Python + Flask + Sqlite_
 ### Description and Routes
 - The backend is a REST Api
 - Contains a CRUD for interacting with the PolicyDB, made in `sqlite` with `sqlalchemy` as ORM
+- Fully tested using Pytest
 
 The project is pretty simple, it is made based on MVC architecture, views are the endpoints, models are the database models and data types, and services are more complex functions used by views. For now the backend is with CORS disabled.
 
@@ -38,9 +39,14 @@ pip3 install -r requirements.txt
 
 After downloading the dependencies you can start the backend:
 ```shell
-# If you're on windows use "pnpm dev-win"
 pnpm dev
 ```
+
+You can also run tests using the following command:
+```shell
+pnpm test
+```
+
 [](#how-the-execution-engine-works)
 ### About the Policy DB
 It is made using `sqlite` because it comes together with Python and for simple purposes it fullfills our needs! The database is currently local, being stored in a file called `policies.db`. It's data modeling is not so strict since the data from frontend is always changing, that being ids, values and so on.
@@ -74,6 +80,7 @@ backend
 └─ app
    ├─ models (contains database models for the application)
    ├─ services (houses the logic for handling requests and responses)
+   ├─ tests (contains test-related files, used by pytest)
    ├─ views (holds route controllers and view templates)
    ├─ database.py (provides functions for interacting with the database)
    └─ config.py (stores configuration settings for the application)

@@ -25,6 +25,7 @@ After installing the dependencies you can use any of the following commands:
 - `dev` - Runs development
 - `build` - Generates a production build
 - `lint` - Lints the project
+- `test` - Tests the project
 
 By default it will run for all apps simultaneously, but if you want to run only a specific app you should use:
 ```
