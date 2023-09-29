@@ -2,4 +2,7 @@ import os
 
 
 def pytest_sessionfinish(session, exitstatus):
-    os.remove('./policies.test.db')
+    try:
+        os.remove('./policies.test.db')
+    except:
+        pass
