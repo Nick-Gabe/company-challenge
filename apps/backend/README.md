@@ -50,7 +50,7 @@ pnpm test
 
 [](#how-the-execution-engine-works)
 ### About the Policy DB
-It is made using `sqlite` because it comes together with Python and for simple purposes it fullfills our needs! The database is currently local, being stored in a file called `policies.db`. It's data modeling is not so strict since the data from frontend is always changing, that being ids, values and so on.
+It is made using `sqlite` because it comes together with Python and for simple purposes it fullfills our needs! The database is currently local, being stored in a file called `policies.db`. Its data modeling is not so strict since the data from frontend is always changing, that being ids, values and so on.
 
 It also uses `sqlalchemy` as an ORM for interacting with the database easily without needing to write SQL queries manually.
 
@@ -62,14 +62,13 @@ The execution engine is also made using Python, and it works like a binary tree 
 Let's suppose my policy is the following:
 - Age > 18 ? Continue
   - Income > 1000 ? Approved
-  - Else ? Continue
-    - Income > 5000 ? Approved
-    - Else ? Denied
+  - Else ? Denied
 - Else ? Denied
 
-Now if I execute it with the data `{ age: 19, income: 900 }`, it will fail in the first check and won't bother checking anything else. But if my data is `{ age: 15, income: 9000}`, it will pass the age check, pass the income check, and will not even read the else condition about income > 5000.
 
-And it also uses the same database as the policies, so the data fetching is super fast and almost real time, changes affect made on it affect the backend and the execution engine almost immediately.
+Now if I execute it with the data `{ age: 15, income: 1100 }`, it will fail in the first check and won't bother checking anything else. But if my data is `{ age: 19, income: 9000}`, it will pass the age check, pass the income check, be approved and will not even read any other if or else condition.
+
+And it also uses the same database as the policies, so the data fetching is super fast and almost real time, changes affect made on it affect the backend and the execution engine immediately (~15ms).
 
 ### Codebase
 To have a clear understanding of the folder structure and files, I will describe the files and folders used in the project:
