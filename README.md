@@ -22,7 +22,7 @@ Now you can install the repository dependencies _(for apps and packages)_ by run
 pnpm install
 ```
 After installing the dependencies you can use any of the following commands:
-- `dev` - Runs development
+- `dev` - Runs development (Click here for [Troubleshooting page](./apps/backend/README.md#troubleshooting))
 - `build` - Generates a production build
 - `lint` - Lints the project
 - `test` - Tests the project

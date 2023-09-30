@@ -52,7 +52,7 @@ export const AddNodeSubButton = ({
       <p
         className={`absolute text-xs ${
           subNodeState.dragTip ? "group-hover:-translate-y-8" : ""
-        } opacity-0 group-hover:opacity-100 top-1 left-4 -z-10 transition-transform pointer-events-none bg-slate-700 text-white p-1 rounded-full`}
+        } opacity-0 group-hover:opacity-100 top-1 left-4 -z-10 transition-transform pointer-events-none bg-slate-700 text-white p-1 rounded-full whitespace-nowrap`}
       >
         Drag & Drop
       </p>

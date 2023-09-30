@@ -9,6 +9,7 @@ _Python + Flask + Sqlite_
     - [About the Policy DB](#about-the-policy-db)
     - [How the Execution Engine works](#how-the-execution-engine-works)
     - [Codebase](#codebase)
+- [Troubleshooting:](#troubleshooting)
 
 ### Description and Routes
 - The backend is a REST Api
@@ -84,4 +85,11 @@ backend
    ├─ views (holds route controllers and view templates)
    ├─ database.py (provides functions for interacting with the database)
    └─ config.py (stores configuration settings for the application)
+```
+
+# Troubleshooting:
+- "python not found" - Usually this means Python isn't on your PATH, try running the application directly instead!
+```shell
+cd apps/backend
+python run.py
 ```
